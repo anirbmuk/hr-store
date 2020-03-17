@@ -9,9 +9,9 @@ https://github.com/anirbmuk/hr-server.git
 - - - -
 
 ## Cloud deployment
-JET - https://menj-stack.herokuapp.com
-Node & Express - https://menj-server.herokuapp.com
-Mongo - Cloud atlas
+JET - https://menj-stack.herokuapp.com  
+Node & Express - https://menj-server.herokuapp.com  
+Mongo - Cloud atlas  
 
 - - - -
 
@@ -28,5 +28,5 @@ App Hosting     | Heroku
 - - - -
 
 ## Sample Users
-Manager - hrmanager@domain.com/retail@123
-Employee - hremployee@domain.com/retail@321
+Manager - hrmanager@domain.com/retail@123  
+Employee - hremployee@domain.com/retail@321  
