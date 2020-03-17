@@ -37,6 +37,12 @@
                   disabled="[[(($current.data.editable === 'while-new' && currentAction() === 'editHandler') || ($current.data.editable === 'never'))]]">
                 </oj-input-number>
               </oj-bind-if>
+              <oj-bind-if test="[[$current.data.component === 'ojInputDate']]">
+                <oj-input-date :id="[[$current.data.componentId]]" label-hint="[[$current.data.label]]"
+                  value="{{currentRow()[$current.data.field]}}" required="[[$current.data.required]]"
+                  disabled="[[(($current.data.editable === 'while-new' && currentAction() === 'editHandler') || ($current.data.editable === 'never'))]]">
+                </oj-input-date>
+              </oj-bind-if>
             </template>
           </oj-bind-for-each>
         </oj-form-layout>

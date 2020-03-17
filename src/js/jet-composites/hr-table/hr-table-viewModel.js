@@ -15,6 +15,7 @@ define([
 'ojs/ojformlayout',
 'ojs/ojinputtext',
 'ojs/ojinputnumber',
+'ojs/ojdatetimepicker',
 'ojs/ojvalidationgroup'
 ],
 function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionDataProvider, Model) {

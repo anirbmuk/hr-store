@@ -60,7 +60,7 @@ function(ko) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputText', label: 'Location Id', required: true, editable: 'while-new' },
+                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', required: true, editable: 'while-new' },
                     { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText', label: 'Street Address', editable: 'always' },
                     { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText', label: 'Postal Code', editable: 'always' },
                     { componentId: 'location_ct', field: 'City', component: 'ojInputText', label: 'City', required: true, editable: 'always' },
