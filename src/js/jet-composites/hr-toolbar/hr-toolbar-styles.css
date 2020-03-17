@@ -1,0 +1,8 @@
+hr-toolbar:not(.oj-complete){
+  visibility: hidden;
+}
+
+hr-toolbar{
+	min-height: 50px;
+	width: 50px;
+}

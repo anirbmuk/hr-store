@@ -1,0 +1,26 @@
+<div :id="[[componentId + '_toolbar']]" style="text-align: right;">
+  <oj-bind-for-each data="[[toolbar]]">
+    <template>
+      <span style="margin: 0 3px;">
+        <oj-button :id="[[componentId + '_toolbar_' + $current.data.name]]" chroming="full"
+        on-oj-action="[[function() { toolbarAction($current.data.handler) }]]" disabled="[[$current.data.disabled]]">
+          <oj-bind-if test="[[$current.data.iconOnly === false]]">
+            <oj-bind-text value="[[$current.data.label]]"></oj-bind-text>
+          </oj-bind-if>
+          <oj-bind-if test="[[$current.data.iconOnly === true]]">
+            <oj-bind-if test="[[$current.data.name === 'create']]">
+              <span slot='startIcon' class='oj-fwk-icon oj-fwk-icon-arrow-n'></span>
+            </oj-bind-if>
+            <oj-bind-if test="[[$current.data.name === 'edit']]">
+              <span slot='startIcon' class='demo-edit-icon-24 demo-icon-font-24'></span>
+            </oj-bind-if>
+            <oj-bind-if test="[[$current.data.name === 'delete']]">
+              <span slot='startIcon' class='demo-garbage-icon-24 demo-icon-font-24'></span>
+            </oj-bind-if>
+          </oj-bind-if>
+        </oj-button>
+      </span>
+    </template>
+  </oj-bind-for-each>
+</div>
+<hr>

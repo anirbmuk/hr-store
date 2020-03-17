@@ -1,0 +1,52 @@
+<oj-messages messages="[[messagesDataprovider]]" position="{}" display="notification"></oj-messages>
+<div class="oj-margin">
+  <oj-bind-if test="[[showToolbar]]">
+    <hr-toolbar component-id="[[componentId]]" toolbar="[[toolbar]]" on-toolbar-action="[[onToolbarAction]]">
+    </hr-toolbar>
+  </oj-bind-if>
+  <div>
+    <oj-table :id="[[componentId + '_datatable']]" data='[[dataProvider]]' columns='[[columns]]' style='width: 100%;'
+      selection-mode="[[selectionMode]]" on-oj-before-current-row="[[onBeforeRowSelection]]"
+      on-selected-changed="[[onSelectionChange]]" />
+  </div>
+  <div>
+    <oj-bind-if test="[[enablePaging]]">
+      <oj-paging-control :id='[[componentId + "_paging"]]' data='[[dataProvider]]' page-size='[[pageSize]]'
+        style='width: 100%;' />
+    </oj-bind-if>
+  </div>
+</div>
+<div id="addOrEditDialogWrapper">
+  <oj-dialog :id="[[componentId + '_addOrEditDialog']]"
+    dialog-title="[[currentAction() === 'addHandler' ? 'Create' : 'Edit']]" style="display: none; width: 80vw;"
+    cancel-behavior="none">
+    <div slot="body">
+      <oj-validation-group :id="[[componentId + '_addOrEditFormTracker']]">
+        <oj-form-layout :id="[[componentId + '_addOrEditFormLayout']]" label-edge="start" max-columns="2">
+          <oj-bind-for-each data="[[modalDataProvider]]">
+            <template>
+              <oj-bind-if test="[[$current.data.component === 'ojInputText']]">
+                <oj-input-text :id="[[$current.data.componentId]]" label-hint="[[$current.data.label]]"
+                  value="{{currentRow()[$current.data.field]}}" required="[[$current.data.required]]"
+                  disabled="[[($current.data.editable === 'while-new' && currentAction() === 'editHandler') || ($current.data.editable === 'never')]]">
+                </oj-input-text>
+              </oj-bind-if>
+              <oj-bind-if test="[[$current.data.component === 'ojInputNumber']]">
+                <oj-input-number :id="[[$current.data.componentId]]" label-hint="[[$current.data.label]]"
+                  value="{{currentRow()[$current.data.field]}}" required="[[$current.data.required]]"
+                  disabled="[[(($current.data.editable === 'while-new' && currentAction() === 'editHandler') || ($current.data.editable === 'never'))]]">
+                </oj-input-number>
+              </oj-bind-if>
+            </template>
+          </oj-bind-for-each>
+        </oj-form-layout>
+      </oj-validation-group>
+    </div>
+    <div slot="footer">
+      <oj-button :id="[[componentId + '_addOrEditDialog_cancelButton']]" on-oj-action="[[addOrEditModelCancel]]">Cancel
+      </oj-button>
+      <oj-button :id="[[componentId + '_addOrEditDialog_saveButton']]" on-oj-action="[[addOrEditModelSave]]">Save
+      </oj-button>
+    </div>
+  </oj-dialog>
+</div>

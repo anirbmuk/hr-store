@@ -1,0 +1,28 @@
+{
+  "name": "hr-table",
+  "version": "1.0.0",
+  "jetVersion": "^8.1.0",
+  "properties": {
+    "componentId": {
+      "type": "string"
+    },
+    "tableProperties": {
+      "type": "object"
+    },
+    "pagingProperties": {
+      "type": "object"
+    },
+    "modelProperties": {
+      "type": "object"
+    }
+  },
+  "methods": {
+
+  }, 
+  "events": {
+
+  }, 
+  "slots": {
+
+  }
+}

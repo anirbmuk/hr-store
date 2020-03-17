@@ -1,0 +1,8 @@
+hr-table:not(.oj-complete){
+  visibility: hidden;
+}
+
+hr-table{
+	min-height: 50px;
+	width: 50px;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "hr-toolbar",
+  "version": "1.0.0",
+  "jetVersion": "^8.1.0",
+  "properties": {
+    "componentId": {
+      "type": "string"
+    },
+    "toolbar": {
+      "type": "object"
+    }
+  },
+  "methods": {
+
+  }, 
+  "events": {
+
+  }, 
+  "slots": {
+
+  }
+}

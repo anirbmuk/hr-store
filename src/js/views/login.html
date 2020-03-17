@@ -1,0 +1,29 @@
+<div style="text-align: center;">
+    <h1>Login</h1>
+</div>
+<hr>
+<div class="oj-margin"></div>
+<div class="login-box">
+    <oj-validation-group id="loginFormTracker">
+        <oj-form-layout>
+            <div class="oj-margin app-padding5">
+                <oj-label for="username" show-required="true">Username</oj-label>
+                <oj-input-text id="username" value="{{username}}" class="login-item" autocomplete="off" autofocus="true"
+                    required="true">
+                </oj-input-text>
+            </div>
+            <div class="oj-margin app-padding5">
+                <oj-label for="password" show-required="true">Password</oj-label>
+                <oj-input-password id="password" value="{{password}}" class="login-item" required="true"></oj-input-password>
+            </div>
+            <div class="oj-margin app-padding5">
+                <oj-button on-oj-action="[[userLogin]]" class="login-item">Login</oj-button>
+            </div>
+            <oj-bind-if test="[[!!errorMessage()]]">
+                <div class="oj-margin app-padding5 error-code center-text">
+                    <oj-bind-text value="[[errorMessage]]"></oj-bind-text>
+                </div>
+            </oj-bind-if>
+        </oj-form-layout>
+    </oj-validation-group>
+</div>

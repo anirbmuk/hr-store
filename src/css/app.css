@@ -1,0 +1,29 @@
+.login-box {
+    max-width: 365px;
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.45);
+}
+
+.login-item {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.app-padding5 {
+    padding: 5px 0;
+}
+
+.app-padding10 {
+    padding: 10px 0;
+}
+
+.error-code {
+    color: #DC1431;
+}
+
+.center-text {
+    text-align: center;
+}
