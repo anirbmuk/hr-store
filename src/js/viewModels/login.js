@@ -27,6 +27,8 @@ define([
             const successFn = function(data) {
                 const state = { token: data.token, email: data.user.email, role: data.user.role };
                 authconfig.setAuthState(state);
+                self.username('');
+                self.password('');
                 routerconfig.navigate('locations');
             };
             const errorFn = function(error) {
