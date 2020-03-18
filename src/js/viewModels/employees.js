@@ -127,7 +127,7 @@ function(ko, KnockoutTemplateUtils) {
             edit: {
                 attributes: [
                     { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber', label: 'Employee Id', required: true,
-                      editable: 'while-new', validators: [ self.validators[0] ],  asyncvalidators: [ self.asyncvalidators[0] ] },
+                      editable: 'while-new', asyncvalidators: [ self.asyncvalidators[0] ] },
                     { componentId: 'employee_fn', field: 'FirstName', component: 'ojInputText', label: 'First Name', editable: 'always' },
                     { componentId: 'employee_ln', field: 'LastName', component: 'ojInputText', label: 'Last Name', required: true, editable: 'always' },
                     { componentId: 'employee_em', field: 'Email', component: 'ojInputText', label: 'Email', required: true, editable: 'always',
