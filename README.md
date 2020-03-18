@@ -28,5 +28,5 @@ App Hosting     | Heroku
 - - - -
 
 ## Sample Users
-Manager - hrmanager@domain.com/retail@123  
-Employee - hremployee@domain.com/retail@321  
+Manager - hrmanager@domain.com/retail@123 (edit rights)  
+Employee - hremployee@domain.com/retail@321 (view rights)  
