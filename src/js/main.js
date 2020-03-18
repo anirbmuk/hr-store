@@ -47,9 +47,9 @@ requirejs.config(
  * object in the callback
  */
 require(['ojs/ojbootstrap', 'knockout', 'appController', 
-         './helper/url-config', './helper/storage-config', './helper/router-config', './helper/rest-config', './helper/message-helper', './helper/format-helper',
+         './helper/storage-config', './helper/router-config', './helper/rest-config', './helper/message-helper', './helper/format-helper',
          './state/auth-state', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu', 'ojs/ojmodule'],
-  function (Bootstrap, ko, app, urlconfig, storageconfig, routerconfig, restutils, messageutils, formatterutils, authconfig) {
+  function (Bootstrap, ko, app, storageconfig, routerconfig, restutils, messageutils, formatterutils, authconfig) {
 
       Bootstrap.whenDocumentReady().then(
         function() {
@@ -63,7 +63,6 @@ require(['ojs/ojbootstrap', 'knockout', 'appController',
 
           function setup() {
             window.app = app;
-            window.urlconfig = urlconfig;
             window.authconfig = authconfig;
             window.storageconfig = storageconfig;
             window.routerconfig = routerconfig;
