@@ -1,11 +1,32 @@
-define(['knockout', 'hr-table/loader'],
-function(ko) {
+define(
+['knockout',
+'ojs/ojvalidation-base',
+'hr-table/loader'],
+function(ko, ValidationBase) {
 
     function LocationViewModel() {
 
         const self = this;
 
         self.hasWritePrivilege = ko.observable(authconfig.hasWritePrivilege());
+
+        self.validateUniqueLocation = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('locations/' + value, function() { reject({ detail: 'Duplicate location id'}); }, function() { resolve(); })
+                });
+            }
+        };
+
+        self.postalCodeValidator = ValidationBase.Validation.validatorFactory('length').createValidator({ max: 12 });
+
+        self.validators = [
+            self.postalCodeValidator
+        ];
+
+        self.asyncvalidators = [
+            self.validateUniqueLocation
+        ];
 
         self.parseLocation = function(response) {
             return {
@@ -60,9 +81,11 @@ function(ko) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', required: true, editable: 'while-new' },
+                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', required: true, editable: 'while-new',
+                      asyncvalidators: [ self.asyncvalidators[0] ] },
                     { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText', label: 'Street Address', editable: 'always' },
-                    { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText', label: 'Postal Code', editable: 'always' },
+                    { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText', label: 'Postal Code', editable: 'always',
+                      validators: [ self.validators[0] ] },
                     { componentId: 'location_ct', field: 'City', component: 'ojInputText', label: 'City', required: true, editable: 'always' },
                     { componentId: 'location_sp', field: 'StateProvince', component: 'ojInputText', label: 'State / Province', editable: 'always' },
                     { componentId: 'location_ci', field: 'CountryId', component: 'ojInputText', label: 'Country', editable: 'always' },

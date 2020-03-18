@@ -7,6 +7,36 @@ function(ko) {
 
         self.hasWritePrivilege = ko.observable(authconfig.hasWritePrivilege());
 
+        self.validateUniqueDepartment = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('departments/' + value, function() { reject({ detail: 'Duplicate department id'}); }, function() { resolve(); })
+                });
+            }
+        };
+
+        self.validateExistingEmployee = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('employees/' + value, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                });
+            }
+        };
+
+        self.validateExistingLocation = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('locations/' + value, function() { resolve(); }, function() { reject({ detail: 'Location does not exist'}); })
+                });
+            }
+        };
+
+        self.asyncvalidators = [
+            self.validateUniqueDepartment,
+            self.validateExistingEmployee,
+            self.validateExistingLocation
+        ];
+
         self.parseDepartment = function(response) {
             return {
                 DepartmentId: response.DepartmentId,
@@ -56,10 +86,13 @@ function(ko) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'department_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department Id', required: true, editable: 'while-new' },
+                    { componentId: 'department_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department Id', required: true, editable: 'while-new',
+                      asyncvalidators: [ self.asyncvalidators[0] ] },
                     { componentId: 'department_dn', field: 'DepartmentName', component: 'ojInputText', label: 'Department Name', required: true, editable: 'always' },
-                    { componentId: 'department_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always' },
-                    { componentId: 'department_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', editable: 'always' }
+                    { componentId: 'department_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always',
+                      asyncvalidators: [ self.asyncvalidators[1] ] },
+                    { componentId: 'department_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', editable: 'always',
+                      asyncvalidators: [ self.asyncvalidators[2] ] }
                 ]
             }
         };

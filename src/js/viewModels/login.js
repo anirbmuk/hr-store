@@ -18,6 +18,14 @@ define([
 
         self.errorMessage = ko.observable('');
 
+        self.emailValidator = {
+            type: 'regExp',
+            options: {
+                pattern: "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*",
+                messageDetail: 'Email is not correctly formatted'
+            }
+        };
+
         self.userLogin = function() {
             self.errorMessage('');
             const data = JSON.stringify({

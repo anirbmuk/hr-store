@@ -7,9 +7,9 @@
     <oj-validation-group id="loginFormTracker">
         <oj-form-layout>
             <div class="oj-margin app-padding5">
-                <oj-label for="username" show-required="true">Username</oj-label>
+                <oj-label for="username" show-required="true">Email</oj-label>
                 <oj-input-text id="username" value="{{username}}" class="login-item" autocomplete="off" autofocus="true"
-                    required="true">
+                    required="true" validators="[[ [emailValidator] ]]">
                 </oj-input-text>
             </div>
             <div class="oj-margin app-padding5">

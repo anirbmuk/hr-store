@@ -22,10 +22,52 @@ function(ko, KnockoutTemplateUtils) {
             return formatterutils.getPhoneNumberString(value);
         };
 
+        self.validateUniqueEmployee = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('employees/' + value, function() { reject({ detail: 'Duplicate employee id'}); }, function() { resolve(); })
+                });
+            }
+        };
+
+        self.validateExistingEmployee = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('employees/' + value, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                });
+            }
+        };
+
+        self.validateExistingDepartment = {
+            validate: function(value) {
+                return new Promise(function(resolve, reject) {
+                    restutils.getRestData('departments/' + value, function() { resolve(); }, function() { reject({ detail: 'Department does not exist'}); })
+                });
+            }
+        };
+
+        self.emailValidator = {
+            type: 'regExp',
+            options: {
+                pattern: "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*",
+                messageDetail: 'Email is not correctly formatted'
+            }
+        };
+
+        self.validators = [
+            self.emailValidator
+        ];
+
+        self.asyncvalidators = [
+            self.validateUniqueEmployee,
+            self.validateExistingEmployee,
+            self.validateExistingDepartment
+        ];
+
         self.parseEmployee = function(response) {
             return {
                 EmployeeId: response.EmployeeId,
-                FirstName: response.FirstName,
+                FirstName: (response.FirstName === undefined ? '' : response.FirstName),
                 LastName: response.LastName,
                 Email: response.Email,
                 PhoneNumber: response.PhoneNumber,
@@ -84,17 +126,21 @@ function(ko, KnockoutTemplateUtils) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber', label: 'Employee Id', required: true, editable: 'while-new' },
+                    { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber', label: 'Employee Id', required: true,
+                      editable: 'while-new', validators: [ self.validators[0] ],  asyncvalidators: [ self.asyncvalidators[0] ] },
                     { componentId: 'employee_fn', field: 'FirstName', component: 'ojInputText', label: 'First Name', editable: 'always' },
                     { componentId: 'employee_ln', field: 'LastName', component: 'ojInputText', label: 'Last Name', required: true, editable: 'always' },
-                    { componentId: 'employee_em', field: 'Email', component: 'ojInputText', label: 'Email', required: true, editable: 'always' },
+                    { componentId: 'employee_em', field: 'Email', component: 'ojInputText', label: 'Email', required: true, editable: 'always',
+                      validators: [ self.validators[0] ] },
                     { componentId: 'employee_pn', field: 'PhoneNumber', component: 'ojInputText', label: 'Phone', editable: 'always' },
                     { componentId: 'employee_hd', field: 'HireDate', component: 'ojInputDate', label: 'Hire Date', required: true, editable: 'always' },
                     { componentId: 'employee_ji', field: 'JobId', component: 'ojInputText', label: 'Job Id', required: true, editable: 'always' },
                     { componentId: 'employee_sa', field: 'Salary', component: 'ojInputNumber', label: 'Salary', editable: 'always' },
                     { componentId: 'employee_cp', field: 'CommissionPct', component: 'ojInputNumber', label: 'Commission', editable: 'always' },
-                    { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always' },
-                    { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department Id', editable: 'always' }
+                    { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always',
+                      asyncvalidators: [ self.asyncvalidators[1] ] },
+                    { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department Id', editable: 'always',
+                      asyncvalidators: [ self.asyncvalidators[2] ] }
                 ]
             }
         };
