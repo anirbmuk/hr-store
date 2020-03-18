@@ -1,10 +1,16 @@
 # hr-store
 MongoDB, Express, Node and JET - the MENJ stack
+A JET 7.2.0 application
+
+- - - -
+
+## Related blog
+https://jetsolutions.anirbanblogs.com/2020/03/jet-with-mongodb-nodejs-and-express.html  
 
 - - - -
 
 ## REST API (Node and Express)
-https://github.com/anirbmuk/hr-server.git
+https://github.com/anirbmuk/hr-server.git  
 
 - - - -
 
