@@ -1,11 +1,26 @@
-define(['knockout', 'hr-table/loader'],
-function(ko) {
+define(
+['knockout',
+'ojs/ojknockouttemplateutils',
+'hr-table/loader'],
+function(ko, KnockoutTemplateUtils) {
 
     function EmployeeViewModel() {
 
         const self = this;
 
         self.hasWritePrivilege = ko.observable(authconfig.hasWritePrivilege());
+
+        self.getDateFormatter = function(date) {
+            return formatterutils.getStringFromDate(date, 'medium');
+        };
+
+        self.getCurrencyFormatter = function(value) {
+            return formatterutils.getCurrencyString(value, 'INR');
+        };
+
+        self.getPhoneNumberFormatter = function(value) {
+            return formatterutils.getPhoneNumberString(value);
+        };
 
         self.parseEmployee = function(response) {
             return {
@@ -27,13 +42,12 @@ function(ko) {
 
         self.employeeColumns = [
             { headerText: 'Employee Id', field: 'EmployeeId' },
-            { headerText: 'First Name', field: 'FirstName' },
-            { headerText: 'Last Name', field: 'LastName' },
+            { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true) },
+            { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true) },
             { headerText: 'Email', field: 'Email' },
-            { headerText: 'Phone', field: 'PhoneNumber' },
-            { headerText: 'Hire Date', field: 'HireDate' },
             { headerText: 'Job Id', field: 'JobId' },
-            { headerText: 'Salary', field: 'Salary' },
+            { headerText: 'Salary', renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true) },
             { headerText: 'Commission', field: 'CommissionPct' },
             { headerText: 'Manager Id', field: 'ManagerId' },
             { headerText: 'Department Id', field: 'DepartmentId' }
@@ -97,6 +111,12 @@ function(ko) {
             pagingEnabled: true,
             pageSize: 8
         };
+
+        self.employeeTemplateProperties = {
+            employeeHireDate: self.getDateFormatter,
+            employeeSalary: self.getCurrencyFormatter,
+            employeePhoneNumber: self.getPhoneNumberFormatter
+        }
 
     }
 

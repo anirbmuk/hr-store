@@ -47,9 +47,9 @@ requirejs.config(
  * object in the callback
  */
 require(['ojs/ojbootstrap', 'knockout', 'appController', 
-         './helper/url-config', './helper/storage-config', './helper/router-config', './helper/rest-config', './helper/message-helper',
+         './helper/url-config', './helper/storage-config', './helper/router-config', './helper/rest-config', './helper/message-helper', './helper/format-helper',
          './state/auth-state', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu', 'ojs/ojmodule'],
-  function (Bootstrap, ko, app, urlconfig, storageconfig, routerconfig, restutils, messageutils, authconfig) { // this callback gets executed when all required modules are loaded
+  function (Bootstrap, ko, app, urlconfig, storageconfig, routerconfig, restutils, messageutils, formatterutils, authconfig) {
 
       Bootstrap.whenDocumentReady().then(
         function() {
@@ -69,6 +69,7 @@ require(['ojs/ojbootstrap', 'knockout', 'appController',
             window.routerconfig = routerconfig;
             window.restutils = restutils;
             window.messageutils = messageutils;
+            window.formatterutils = formatterutils;
           }
 
           // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready

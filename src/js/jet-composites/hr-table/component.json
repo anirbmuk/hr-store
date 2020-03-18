@@ -14,6 +14,9 @@
     },
     "modelProperties": {
       "type": "object"
+    },
+    "templateProperties": {
+      "type": "object"
     }
   },
   "methods": {

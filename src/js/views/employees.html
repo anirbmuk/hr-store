@@ -3,5 +3,26 @@
 <hr-table component-id="employees"
           table-properties="[[employeeTableProperties]]"
           model-properties="[[employeeModelProperties]]"
-          paging-properties="[[employeePagingProperties]]">
+          paging-properties="[[employeePagingProperties]]"
+          template-properties="[[employeeTemplateProperties]]">
 </hr-table>
+<script type="text/html" id="employee_hd_template">
+    <td>
+        <oj-bind-text value="[[$parent.templateProperties.employeeHireDate($context.row.HireDate)]]"></oj-bind-text>
+    </td>
+</script>
+<script type="text/html" id="employee_pn_template">
+    <td>
+        <oj-bind-text value="[[$parent.templateProperties.employeePhoneNumber($context.row.PhoneNumber)]]"></oj-bind-text>
+    </td>
+</script>
+<script type="text/html" id="employee_sa_template">
+    <td>
+        <oj-bind-text value="[[$parent.templateProperties.employeeSalary($context.row.Salary)]]"></oj-bind-text>
+    </td>
+</script>
+<script type="text/html" id="employee_fn_ln_template">
+    <td>
+        <oj-bind-text value="[[$context.row.FirstName + ' ' + $context.row.LastName]]"></oj-bind-text>
+    </td>
+</script>

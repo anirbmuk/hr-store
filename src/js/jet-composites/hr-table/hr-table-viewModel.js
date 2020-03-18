@@ -37,6 +37,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
         self.tableProperties = self.properties.tableProperties;
         self.modelProperties = self.properties.modelProperties;
         self.pagingProperties = self.properties.pagingProperties;
+        self.templateProperties = self.properties.templateProperties || {};
 
         self.columns = self.tableProperties.columns;
         self.showToolbar = !!self.tableProperties.toolbar && Array.isArray(self.tableProperties.toolbar) && self.tableProperties.toolbar.length > 0;
@@ -138,9 +139,6 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
                 success: function() {
                   self.messages(self.buildMessage('confirmation', 'Data saved', 'Your changes have been saved', 3000));
                   self.refreshDatasource();
-                  self.currentRowIndex(-1);
-                  self.currentRowKey(null);
-                  self.currentRow({});
                 },
                 error: function(err) {
                   self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
@@ -158,9 +156,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           const successFn = function(data) {
             self.messages(self.buildMessage('confirmation', 'Data saved', 'Your changes have been saved', 3000));
             self.refreshDatasource();
-            self.currentRowIndex(-1);
-            self.currentRowKey(null);
-            self.currentRow({});
+            $(modalId)[0].close();
           };
 
           const errorFn = function(err) {
@@ -186,7 +182,6 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
                 error: errorFn
               });
             }
-            $(modalId)[0].close();
           } else {
             self.messages(self.buildMessage('error', 'Validation error', 'There are validation errors on the form', 3000));
           }
