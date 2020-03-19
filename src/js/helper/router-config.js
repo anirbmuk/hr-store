@@ -18,7 +18,8 @@ define(['knockout', 'ojs/ojrouter'], function(ko) {
         login: { id: 'login', label: 'Login', isDefault: true },
         locations: { id: 'locations', label: 'Locations', canEnter },
         departments: { id: 'departments', label: 'Departments', canEnter },
-        employees: { id: 'employees', label: 'Employees', canEnter }
+        employees: { id: 'employees', label: 'Employees', canEnter },
+        masterdetail: { id: 'masterdetail', label: 'Master-Detail', canEnter }
     };
 
     RouterConfigUtils.prototype.configureRoutes = function() {
@@ -32,7 +33,8 @@ define(['knockout', 'ojs/ojrouter'], function(ko) {
         return [
             { id: 'locations', name: 'Locations' },
             { id: 'departments', name: 'Departments' },
-            { id: 'employees', name: 'Employees' }
+            { id: 'employees', name: 'Employees' },
+            { id: 'masterdetail', name: 'Master-Detail' }
         ];
     };
 
