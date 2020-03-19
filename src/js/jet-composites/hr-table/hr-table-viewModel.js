@@ -65,6 +65,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
         self.pageSize = self.pagingProperties.pageSize || 8;
 
         self.modelparams = self.modelProperties.modelparams;
+        self.preSave = self.modelProperties.preSave || function() { return true; };
         self.urlRoot = restutils.buildURLPath(self.modelparams.urlPath);
         
         self.model = Model.getModel({
@@ -167,7 +168,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           const collection = self.getCollection();
           const data = self.currentRow();
 
-          if (self.preSave(trackerId)) {
+          const saveAction = function() {
             if (self.currentAction() === 'addHandler') {
               collection.create(data, {
                 beforeSend: restutils.beforeSend,
@@ -180,6 +181,23 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
                 patch: 'patch',
                 success: successFn,
                 error: errorFn
+              });
+            }
+          };
+
+          if (self.isFormValid(trackerId)) {
+            const preSaveValidation = self.preSave(data);
+            if (typeof preSaveValidation === 'boolean') {
+              if (preSaveValidation) {
+                saveAction();
+              } else {
+                self.messages(self.buildMessage('error', 'Validation error', 'There are validation errors on the form', 3000));
+              }
+            } else if (preSaveValidation instanceof Promise) {
+              preSaveValidation.then(function() {
+                saveAction();
+              }).catch(function(error) {
+                self.messages(self.buildMessage('error', 'Validation error', error, 3000));
               });
             }
           } else {
@@ -217,9 +235,19 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           } else {
             self.currentRowIndex(self.currentRowEventData().rowIndex);
             self.currentRowKey(self.currentRowEventData().rowKey);
+            const eventDetails = {
+              rowIndex: self.currentRowIndex(),
+              rowKey: self.currentRowKey()
+            };
+            self.composite.dispatchEvent(new CustomEvent('rowSelectionChange', { bubbles: true, cancelable: false, detail: eventDetails }));
           }
+
         };
     };
+
+    HrTableModel.prototype.getDataProvider = function() {
+      return this.dataProvider();
+    }
 
     HrTableModel.prototype.validateHandler = function(handler) {
       const self = this;
@@ -250,7 +278,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
       return true;
     };
 
-    HrTableModel.prototype.preSave = function(trackerId) {
+    HrTableModel.prototype.isFormValid = function(trackerId) {
       const tracker = $(trackerId)[0];
       if (tracker && tracker.valid === 'valid') {
         return true;

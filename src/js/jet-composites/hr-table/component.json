@@ -20,10 +20,23 @@
     }
   },
   "methods": {
-
+    "getDataProvider": {
+      "return": "object"
+    },
+    "refreshDatasource": {
+      "return": "void"
+    }
   }, 
   "events": {
-
+    "rowSelectionChange": {
+      "description": "Event raised when a table row is selected",
+      "bubbles" : true,
+      "cancelable" : false,
+      "detail" : {
+        "rowIndex": { "type" : "number" },
+        "rowKey": { "type" : "number" }
+      }
+    }
   }, 
   "slots": {
 
