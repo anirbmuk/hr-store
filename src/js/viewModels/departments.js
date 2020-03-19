@@ -10,7 +10,7 @@ function(ko) {
         self.validateUniqueDepartment = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('departments/' + value, function() { reject({ detail: 'Duplicate department id'}); }, function() { resolve(); })
+                    restutils.getRestData('departments/' + value, null, function() { reject({ detail: 'Duplicate department id'}); }, function() { resolve(); })
                 });
             }
         };
@@ -18,7 +18,7 @@ function(ko) {
         self.validateExistingEmployee = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('employees/' + value, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                    restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
                 });
             }
         };
@@ -26,7 +26,7 @@ function(ko) {
         self.validateExistingLocation = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('locations/' + value, function() { resolve(); }, function() { reject({ detail: 'Location does not exist'}); })
+                    restutils.getRestData('locations/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Location does not exist'}); })
                 });
             }
         };
@@ -51,8 +51,8 @@ function(ko) {
         self.departmentColumns = [
             { headerText: 'Department Id', field: 'DepartmentId' },
             { headerText: 'Department Name', field: 'DepartmentName' },
-            { headerText: 'Manager Id', field: 'ManagerId' },
-            { headerText: 'Location Id', field: 'LocationId' }
+            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Location Id', field: 'LocationId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.departmentTableProperties = {

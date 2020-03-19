@@ -13,7 +13,7 @@ function(ko, ValidationBase) {
         self.validateUniqueLocation = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('locations/' + value, function() { reject({ detail: 'Duplicate location id'}); }, function() { resolve(); })
+                    restutils.getRestData('locations/' + value, null, function() { reject({ detail: 'Duplicate location id'}); }, function() { resolve(); })
                 });
             }
         };
@@ -45,10 +45,10 @@ function(ko, ValidationBase) {
 
         self.locationColumns = [
             { headerText: 'LocationId Id', field: 'LocationId' },
-            { headerText: 'Street Address', field: 'StreetAddress' },
-            { headerText: 'Postal Code', field: 'PostalCode' },
+            { headerText: 'Street Address', field: 'StreetAddress', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
             { headerText: 'City', field: 'City' },
-            { headerText: 'State / Province', field: 'StateProvince' },
+            { headerText: 'State / Province', field: 'StateProvince', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Country', field: 'CountryId' }
         ];
 

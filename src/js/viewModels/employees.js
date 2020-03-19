@@ -25,7 +25,7 @@ function(ko, KnockoutTemplateUtils) {
         self.validateUniqueEmployee = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('employees/' + value, function() { reject({ detail: 'Duplicate employee id'}); }, function() { resolve(); })
+                    restutils.getRestData('employees/' + value, null, function() { reject({ detail: 'Duplicate employee id'}); }, function() { resolve(); })
                 });
             }
         };
@@ -33,7 +33,7 @@ function(ko, KnockoutTemplateUtils) {
         self.validateExistingEmployee = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('employees/' + value, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                    restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
                 });
             }
         };
@@ -41,7 +41,7 @@ function(ko, KnockoutTemplateUtils) {
         self.validateExistingDepartment = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('departments/' + value, function() { resolve(); }, function() { reject({ detail: 'Department does not exist'}); })
+                    restutils.getRestData('departments/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Department does not exist'}); })
                 });
             }
         };
@@ -83,16 +83,16 @@ function(ko, KnockoutTemplateUtils) {
         self.urlPath = 'employees';
 
         self.employeeColumns = [
-            { headerText: 'Employee Id', field: 'EmployeeId' },
+            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
-            { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true) },
-            { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true) },
+            { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true), headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true), headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Email', field: 'Email' },
-            { headerText: 'Job Id', field: 'JobId' },
-            { headerText: 'Salary', renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true) },
-            { headerText: 'Commission', field: 'CommissionPct' },
-            { headerText: 'Manager Id', field: 'ManagerId' },
-            { headerText: 'Department Id', field: 'DepartmentId' }
+            { headerText: 'Job Id', field: 'JobId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Salary', renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true), headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Commission', field: 'CommissionPct', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Department Id', field: 'DepartmentId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.employeeTableProperties = {
