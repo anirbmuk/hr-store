@@ -17,6 +17,9 @@
     },
     "templateProperties": {
       "type": "object"
+    },
+    "dataObject": {
+      "type": "object"
     }
   },
   "methods": {
@@ -25,6 +28,9 @@
     },
     "refreshDatasource": {
       "return": "void"
+    },
+    "getTestProperty": {
+      "return": "string"
     }
   }, 
   "events": {

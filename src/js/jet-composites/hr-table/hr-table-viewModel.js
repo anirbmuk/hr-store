@@ -64,8 +64,8 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
         self.enablePaging = self.pagingProperties.pagingEnabled;
         self.pageSize = self.pagingProperties.pageSize || 8;
 
-        self.modelparams = self.modelProperties.modelparams;
-        self.preSave = self.modelProperties.preSave || function() { return true; };
+        self.modelparams = (!!self.modelProperties && !!self.modelProperties.modelparams) ? self.modelProperties.modelparams : {};
+        self.preSave = (!!self.modelProperties && self.modelProperties.preSave) ? self.modelProperties.preSave : function() { return true; };
         self.urlRoot = restutils.buildURLPath(self.modelparams.urlPath);
         
         self.model = Model.getModel({
@@ -92,8 +92,14 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           collectionObject.customURL = function(operation, collection, options) {
             const limit = options.fetchSize;
             const skip = options.startIndex > 0 ? (Math.floor(options.startIndex / options.fetchSize) * limit): 0;
+            let path = self.urlRoot;
+            if (path.indexOf('?') > -1) {
+              path += '&limit=' + limit + '&skip=' + skip
+            } else {
+              path += '?limit=' + limit + '&skip=' + skip;
+            }
             return {
-              url: self.urlRoot + '?limit=' + limit + '&skip=' + skip,
+              url: path,
               contentType: 'application/json',
               beforeSend: restutils.beforeSend
             }
@@ -298,10 +304,18 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
 
     HrTableModel.prototype.refreshDatasource = function() {
       const self = this;
-      if (self.enablePaging) {
-        self.dataProvider(new PagingDataProviderView(new CollectionDataProvider(self.getCollection())));
+      if (!!self.properties.dataObject) {
+        if (self.enablePaging) {
+          self.dataProvider(new PagingDataProviderView(new ArrayDataProvider(self.properties.dataObject.data, { idAttribute: self.properties.dataObject.idAttribute })));
+        } else {
+          self.dataProvider(new ArrayDataProvider(self.properties.dataObject.data, { idAttribute: self.properties.dataObject.idAttribute }));
+        }
       } else {
-        self.dataProvider(new CollectionDataProvider(self.getCollection()));
+        if (self.enablePaging) {
+          self.dataProvider(new PagingDataProviderView(new CollectionDataProvider(self.getCollection())));
+        } else {
+          self.dataProvider(new CollectionDataProvider(self.getCollection()));
+        }
       }
     };
 
