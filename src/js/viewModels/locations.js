@@ -45,10 +45,10 @@ function(ko, ValidationBase) {
 
         self.locationColumns = [
             { headerText: 'LocationId Id', field: 'LocationId' },
-            { headerText: 'Street Address', field: 'StreetAddress', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Street Address', field: 'StreetAddress', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'City', field: 'City' },
-            { headerText: 'State / Province', field: 'StateProvince', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'State / Province', field: 'StateProvince', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Country', field: 'CountryId' }
         ];
 

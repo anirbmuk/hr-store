@@ -51,8 +51,8 @@ function(ko) {
         self.departmentColumns = [
             { headerText: 'Department Id', field: 'DepartmentId' },
             { headerText: 'Department Name', field: 'DepartmentName' },
-            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Location Id', field: 'LocationId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' }
+            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Location Id', field: 'LocationId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.departmentTableProperties = {

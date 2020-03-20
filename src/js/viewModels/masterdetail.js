@@ -28,9 +28,9 @@ function($, ko) {
 
         self.locationColumns = [
             { headerText: 'LocationId Id', field: 'LocationId' },
-            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'City', field: 'City' },
-            { headerText: 'Country', field: 'CountryId' }
+            { headerText: 'Country', field: 'CountryId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.locationTableProperties = {
@@ -82,7 +82,7 @@ function($, ko) {
             { headerText: 'Department Id', field: 'DepartmentId' },
             { headerText: 'Department Name', field: 'DepartmentName' },
             { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Location Id', field: 'LocationId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' }
+            { headerText: 'Location Id', field: 'LocationId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.departmentTableProperties = {

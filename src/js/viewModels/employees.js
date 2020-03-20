@@ -83,16 +83,16 @@ function(ko, KnockoutTemplateUtils) {
         self.urlPath = 'employees';
 
         self.employeeColumns = [
-            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
-            { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true), headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true), headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Email', field: 'Email' },
-            { headerText: 'Job Id', field: 'JobId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Salary', renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true), headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Commission', field: 'CommissionPct', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Department Id', field: 'DepartmentId', headerClassName: 'oj-sm-hide', className: 'oj-sm-only-hide' }
+            { headerText: 'Job Id', field: 'JobId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Salary', renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Commission', field: 'CommissionPct', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Department Id', field: 'DepartmentId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.employeeTableProperties = {
