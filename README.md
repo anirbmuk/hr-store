@@ -1,6 +1,5 @@
 # hr-store
-MongoDB, Express, Node and JET - the MENJ stack
-A JET 7.2.0 application
+MongoDB, Express, Node and JET - the MENJ stack  
 
 - - - -
 
@@ -22,14 +21,14 @@ Mongo - Cloud atlas
 - - - -
 
 ## Technical mumbo-jumbo
-What I wanted   | What I got
---------------- | --------------
-IDE             | MS Visual Studio Code
-Front-end       | JET 7.2.0
-Database        | MongoDB
-Middleware      | Node and Express
-MW Hosting      | Heroku
-App Hosting     | Heroku
+What I wanted     | What I got
+----------------- | --------------
+IDE               | MS Visual Studio Code
+Front-end         | Oracle JET (7.2.0)
+Database          | MongoDB (4.2.3)
+Middleware        | Node (10.15.3), Express (4.17.1)
+MW Hosting        | Heroku
+App Hosting       | Heroku
 
 - - - -
 
