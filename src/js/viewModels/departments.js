@@ -57,6 +57,7 @@ function(ko) {
 
         self.departmentTableProperties = {
             columns: self.departmentColumns,
+        sortOptions: 'DepartmentId:asc',
             toolbar: [
                 {
                     name: 'create',

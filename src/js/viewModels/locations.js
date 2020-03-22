@@ -54,6 +54,7 @@ function(ko, ValidationBase) {
 
         self.locationTableProperties = {
             columns: self.locationColumns,
+            sortOptions: 'LocationId:asc',
             toolbar: [
                 {
                     name: 'create',

@@ -97,6 +97,7 @@ function(ko, KnockoutTemplateUtils) {
 
         self.employeeTableProperties = {
             columns: self.employeeColumns,
+            sortOptions: 'EmployeeId:asc',
             toolbar: [
                 {
                     name: 'create',

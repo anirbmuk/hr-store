@@ -47,6 +47,8 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           self.toolbar = new ArrayDataProvider([]);
         }
 
+        self.sortOptions = self.tableProperties.sortOptions || '';
+
         if (!!self.tableProperties.edit && !!self.tableProperties.edit.attributes) {
           const modalFields = self.tableProperties.edit.attributes || [];
           self.modalDataProvider = new ArrayDataProvider(ko.observableArray(modalFields), { keyAttributes: 'componentId' });
@@ -88,7 +90,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
             return {
                 totalResults: response.estimatedCount
             };
-        };
+          };
           collectionObject.customURL = function(operation, collection, options) {
             const limit = options.fetchSize;
             const skip = options.startIndex > 0 ? (Math.floor(options.startIndex / options.fetchSize) * limit): 0;
@@ -97,6 +99,9 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
               path += '&limit=' + limit + '&skip=' + skip
             } else {
               path += '?limit=' + limit + '&skip=' + skip;
+            }
+            if (!!self.sortOptions) {
+              path += '&sortBy=' + self.sortOptions;
             }
             return {
               url: path,
