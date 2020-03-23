@@ -35,6 +35,7 @@ function($, ko) {
 
         self.locationTableProperties = {
             columns: self.locationColumns,
+            sortOptions: 'LocationId:asc',
             selection: {
                 row: 'single',
                 column: 'none'
@@ -87,6 +88,7 @@ function($, ko) {
 
         self.departmentTableProperties = {
             columns: self.departmentColumns,
+            sortOptions: 'DepartmentId:asc',
             selection: {
                 row: 'single',
                 column: 'none'
