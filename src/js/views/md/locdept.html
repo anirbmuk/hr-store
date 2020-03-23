@@ -1,0 +1,23 @@
+<div class="oj-flex">
+    <div class="oj-sm-12 oj-md-6 oj-lg-6">
+        <h5>Locations</h5>
+        <hr>
+        <hr-table id="md_locations"
+                  component-id="locations"
+                  table-properties="[[locationTableProperties]]"
+                  model-properties="[[locationModelProperties]]"
+                  paging-properties="[[locationPagingProperties]]"
+                  on-row-selection-change="[[onRowSelectionChange]]">
+        </hr-table>
+    </div>
+    <div class="oj-sm-12 oj-md-6 oj-lg-6">
+        <h5>Departments</h5>
+        <hr>
+        <hr-table id="md_departments"
+                  component-id="departments"
+                  table-properties="[[departmentTableProperties]]"
+                  paging-properties="[[departmentPagingProperties]]"
+                  data-object="[[departmentDataObject]]">
+        </hr-table>
+    </div>
+</div>

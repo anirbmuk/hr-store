@@ -1,0 +1,28 @@
+<div class="oj-flex">
+    <div class="oj-sm-12 oj-md-6 oj-lg-6">
+        <h5>Employees</h5>
+        <hr>
+        <hr-table id="md_managers"
+                  component-id="managers"
+                  table-properties="[[employeeTableProperties]]"
+                  model-properties="[[employeeModelProperties]]"
+                  paging-properties="[[employeePagingProperties]]"
+                  on-row-selection-change="[[onRowSelectionChange]]">
+        </hr-table>
+    </div>
+    <div class="oj-sm-12 oj-md-6 oj-lg-6">
+        <h5>Directs</h5>
+        <hr>
+        <hr-table id="md_directs"
+                  component-id="directs"
+                  table-properties="[[directTableProperties]]"
+                  paging-properties="[[directPagingProperties]]"
+                  data-object="[[directDataObject]]">
+        </hr-table>
+    </div>
+</div>
+<script type="text/html" id="employee_fn_ln_template">
+    <td>
+        <oj-bind-text value="[[$context.row.FirstName + ' ' + $context.row.LastName]]"></oj-bind-text>
+    </td>
+</script>

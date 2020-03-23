@@ -1,25 +1,16 @@
 <h1>Master Detail</h1>
 <hr>
-<div class="oj-flex">
-    <div class="oj-sm-12 oj-md-6 oj-lg-6">
-        <h5>Locations</h5>
-        <hr>
-        <hr-table id="md_locations"
-                  component-id="locations"
-                  table-properties="[[locationTableProperties]]"
-                  model-properties="[[locationModelProperties]]"
-                  paging-properties="[[locationPagingProperties]]"
-                  on-row-selection-change="[[onRowSelectionChange]]">
-        </hr-table>
-    </div>
-    <div class="oj-sm-12 oj-md-6 oj-lg-6">
-        <h5>Departments</h5>
-        <hr>
-        <hr-table id="md_departments"
-                  component-id="departments"
-                  table-properties="[[departmentTableProperties]]"
-                  paging-properties="[[departmentPagingProperties]]"
-                  data-object="[[departmentDataObject]]">
-        </hr-table>
-    </div>
+<oj-tab-bar edge="top" selection="{{ currentTab }}" class="oj-sm-condense">
+    <ul>
+        <oj-bind-for-each data="[[mdTabs]]">
+            <template>
+                <li :id="[[$current.data.id]]">
+                    <span><oj-bind-text value="[[$current.data.label]]"></oj-bind-text></span>
+                </li>
+            </template>
+        </oj-bind-for-each>
+    </ul>
+</oj-tab-bar>
+<div style="margin: 10px auto;">
+    <oj-module config='[[currentModule]]'></oj-module>
 </div>
