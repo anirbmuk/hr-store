@@ -13,7 +13,11 @@ function(ko, ValidationBase) {
         self.validateUniqueLocation = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('locations/' + value, null, function() { reject({ detail: 'Duplicate location id'}); }, function() { resolve(); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('locations/' + value, null, function() { reject({ detail: 'Duplicate location id'}); }, function() { resolve(); })
+                    }
                 });
             }
         };

@@ -10,7 +10,11 @@ function(ko) {
         self.validateUniqueDepartment = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('departments/' + value, null, function() { reject({ detail: 'Duplicate department id'}); }, function() { resolve(); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('departments/' + value, null, function() { reject({ detail: 'Duplicate department id'}); }, function() { resolve(); })
+                    }
                 });
             }
         };
@@ -18,7 +22,11 @@ function(ko) {
         self.validateExistingEmployee = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                    }
                 });
             }
         };
@@ -26,7 +34,11 @@ function(ko) {
         self.validateExistingLocation = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('locations/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Location does not exist'}); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('locations/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Location does not exist'}); })
+                    }
                 });
             }
         };
@@ -57,7 +69,7 @@ function(ko) {
 
         self.departmentTableProperties = {
             columns: self.departmentColumns,
-        sortOptions: 'DepartmentId:asc',
+            sortOptions: 'DepartmentId:asc',
             toolbar: [
                 {
                     name: 'create',

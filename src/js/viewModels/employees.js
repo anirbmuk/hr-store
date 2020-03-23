@@ -25,7 +25,11 @@ function(ko, KnockoutTemplateUtils) {
         self.validateUniqueEmployee = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('employees/' + value, null, function() { reject({ detail: 'Duplicate employee id'}); }, function() { resolve(); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('employees/' + value, null, function() { reject({ detail: 'Duplicate employee id'}); }, function() { resolve(); })
+                    }
                 });
             }
         };
@@ -33,7 +37,11 @@ function(ko, KnockoutTemplateUtils) {
         self.validateExistingEmployee = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                    }
                 });
             }
         };
@@ -41,7 +49,11 @@ function(ko, KnockoutTemplateUtils) {
         self.validateExistingDepartment = {
             validate: function(value) {
                 return new Promise(function(resolve, reject) {
-                    restutils.getRestData('departments/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Department does not exist'}); })
+                    if (!value) {
+                        resolve();
+                    } else {
+                        restutils.getRestData('departments/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Department does not exist'}); })
+                    }
                 });
             }
         };
