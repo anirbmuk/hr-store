@@ -50,6 +50,12 @@
                   validators="[[$current.data.validators]]" async-validators="[[$current.data.asyncvalidators]]">
                 </oj-input-date>
               </oj-bind-if>
+              <oj-bind-if test="[[$current.data.component === 'ojSelectOne']]">
+                <oj-select-one :id="[[$current.data.componentId]]" label-hint="[[$current.data.label]]"
+                  value="{{currentRow()[$current.data.field]}}" required="[[$current.data.required]]" options="[[$current.data.options]]"
+                  disabled="[[(($current.data.editable === 'while-new' && currentAction() === 'editHandler') || ($current.data.editable === 'never'))]]">
+                </oj-select-one>
+              </oj-bind-if>
             </template>
           </oj-bind-for-each>
         </oj-form-layout>

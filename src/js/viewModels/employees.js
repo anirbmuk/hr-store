@@ -1,8 +1,9 @@
 define(
 ['knockout',
 'ojs/ojknockouttemplateutils',
+'ojs/ojarraydataprovider',
 'hr-table/loader'],
-function(ko, KnockoutTemplateUtils) {
+function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
 
     function EmployeeViewModel() {
 
@@ -21,6 +22,21 @@ function(ko, KnockoutTemplateUtils) {
         self.getPhoneNumberFormatter = function(value) {
             return formatterutils.getPhoneNumberString(value);
         };
+
+        self.employeeJobs = ko.observable(new ArrayDataProvider([]));
+
+        (function() {
+            const successFn = function(data) {
+                const jobs = [];
+                if (!!data && !!data.items && Array.isArray(data.items)) {
+                    data.items.forEach(function(job) {
+                        jobs.push({ value: job.JobId, label: job.JobTitle });
+                    });
+                }
+                self.employeeJobs(new ArrayDataProvider(jobs, { keyAttributes: 'value' }));
+            };
+            restutils.getRestData('jobs?sortBy=JobId:asc', null, successFn, function() { });
+        })();
 
         self.validateUniqueEmployee = {
             validate: function(value) {
@@ -147,7 +163,8 @@ function(ko, KnockoutTemplateUtils) {
                       validators: [ self.validators[0] ] },
                     { componentId: 'employee_pn', field: 'PhoneNumber', component: 'ojInputText', label: 'Phone', editable: 'always' },
                     { componentId: 'employee_hd', field: 'HireDate', component: 'ojInputDate', label: 'Hire Date', required: true, editable: 'always' },
-                    { componentId: 'employee_ji', field: 'JobId', component: 'ojInputText', label: 'Job Id', required: true, editable: 'always' },
+                    { componentId: 'employee_ji', field: 'JobId', component: 'ojSelectOne', label: 'Job Id', required: true, editable: 'always',
+                      options: self.employeeJobs },
                     { componentId: 'employee_sa', field: 'Salary', component: 'ojInputNumber', label: 'Salary', editable: 'always' },
                     { componentId: 'employee_cp', field: 'CommissionPct', component: 'ojInputNumber', label: 'Commission', editable: 'always' },
                     { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always',
