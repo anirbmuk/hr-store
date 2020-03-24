@@ -1,0 +1,7 @@
+hr-search:not(.oj-complete){
+  visibility: hidden;
+}
+
+.oj-combobox-choice {
+  width: 160px !important;
+}

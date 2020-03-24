@@ -114,6 +114,11 @@ function(ko, ValidationBase) {
             pageSize: 8
         };
 
+        self.locationSearchProperties = {
+            showSearch: true,
+            searchPlaceholder: 'Search...'
+        }
+
     }
 
     return LocationViewModel;

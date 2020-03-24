@@ -1,0 +1,29 @@
+{
+  "name": "hr-search",
+  "version": "1.0.0",
+  "jetVersion": "^7.2.0",
+  "properties": {
+    "componentId": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    }
+  },
+  "methods": {
+    
+  }, 
+  "events": {
+    "search": {
+      "description": "Event raised when a search is executed",
+      "bubbles" : true,
+      "cancelable" : false,
+      "detail" : {
+        "filter": { "type" : "string" }
+      }
+    }
+  }, 
+  "slots": {
+
+  }
+}

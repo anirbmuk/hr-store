@@ -1,9 +1,13 @@
 <oj-messages messages="[[messagesDataprovider]]" position="{}" display="notification"></oj-messages>
+<oj-bind-if test="[[showSearch]]">
+  <hr-search component-id="[[componentId]]" placeholder="[[searchPlaceholder]]" on-search="[[applyFilter]]" style="float: right;">
+  </hr-search>
+</oj-bind-if>
+<oj-bind-if test="[[showToolbar]]">
+  <hr-toolbar component-id="[[componentId]]" toolbar="[[toolbar]]" on-toolbar-action="[[onToolbarAction]]">
+  </hr-toolbar>
+</oj-bind-if>
 <div class="oj-margin">
-  <oj-bind-if test="[[showToolbar]]">
-    <hr-toolbar component-id="[[componentId]]" toolbar="[[toolbar]]" on-toolbar-action="[[onToolbarAction]]">
-    </hr-toolbar>
-  </oj-bind-if>
   <div>
     <oj-table :id="[[componentId + '_datatable']]" data='[[dataProvider]]' columns='[[columns]]' style='width: 100%;'
       selection-mode="[[selectionMode]]" on-oj-before-current-row="[[onBeforeRowSelection]]"

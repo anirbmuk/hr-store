@@ -11,6 +11,7 @@ define([
 'ojs/ojpagingcontrol',
 'ojs/ojbutton',
 'hr-toolbar/loader',
+'hr-search/loader',
 'ojs/ojdialog',
 'ojs/ojformlayout',
 'ojs/ojinputtext',
@@ -25,6 +26,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
 
         self.dataProvider = ko.observable();
         self.currentModel = ko.observable();
+        self.searchTerm = ko.observable();
 
         self.messages = ko.observableArray([]);
         self.messagesDataprovider = messageutils.messagesDataprovider(self.messages);
@@ -38,6 +40,10 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
         self.modelProperties = self.properties.modelProperties;
         self.pagingProperties = self.properties.pagingProperties;
         self.templateProperties = self.properties.templateProperties || {};
+        self.searchProperties = self.properties.searchProperties || {};
+
+        self.showSearch = self.searchProperties.showSearch;
+        self.searchPlaceholder = self.searchProperties.searchPlaceholder;
 
         self.columns = self.tableProperties.columns;
         self.showToolbar = !!self.tableProperties.toolbar && Array.isArray(self.tableProperties.toolbar) && self.tableProperties.toolbar.length > 0;
@@ -95,6 +101,15 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
             const limit = options.fetchSize;
             const skip = options.startIndex > 0 ? (Math.floor(options.startIndex / options.fetchSize) * limit): 0;
             let path = self.urlRoot;
+
+            if (self.searchTerm()) {
+              if (path.indexOf('?') > -1) {
+                path += '&' + self.searchTerm()
+              } else {
+                path += '?' + self.searchTerm()
+              }
+            }
+
             if (path.indexOf('?') > -1) {
               path += '&limit=' + limit + '&skip=' + skip
             } else {
@@ -254,6 +269,11 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           }
 
         };
+
+        self.applyFilter = function(event) {
+          self.searchTerm(event.detail);
+          self.refreshDatasource();
+        }
     };
 
     HrTableModel.prototype.getDataProvider = function() {

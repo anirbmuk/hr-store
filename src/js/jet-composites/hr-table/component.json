@@ -18,6 +18,9 @@
     "templateProperties": {
       "type": "object"
     },
+    "searchProperties": {
+      "type": "object"
+    },
     "dataObject": {
       "type": "object"
     }

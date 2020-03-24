@@ -175,6 +175,11 @@ function(ko, KnockoutTemplateUtils) {
             employeeHireDate: self.getDateFormatter,
             employeeSalary: self.getCurrencyFormatter,
             employeePhoneNumber: self.getPhoneNumberFormatter
+        };        
+
+        self.employeeSearchProperties = {
+            showSearch: true,
+            searchPlaceholder: 'Search...'
         }
 
     }

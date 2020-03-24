@@ -123,6 +123,11 @@ function(ko) {
             pageSize: 8
         };
 
+        self.departmentSearchProperties = {
+            showSearch: true,
+            searchPlaceholder: 'Search...'
+        }
+
     }
 
     return DepartmentViewModel;

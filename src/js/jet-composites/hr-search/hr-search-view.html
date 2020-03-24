@@ -1,0 +1,12 @@
+<oj-combobox-one :id="[[thisComponentId]]"
+                 placeholder="[[placeholder]]"
+                 options="[[searchTags]]"
+                 on-oj-value-updated="[[search]]"
+                 filter-on-open="rawValue">
+  <a slot="end" :id="[[componentId + '_search_btn']]"
+                class="demo-search-button oj-fwk-icon oj-fwk-icon-magnifier oj-clickable-icon-nocontent"
+                style="width: 32px;"
+                role="button"
+                aria-label="Search"
+                on-click="[[search]]"></a>
+</oj-combobox-one>
