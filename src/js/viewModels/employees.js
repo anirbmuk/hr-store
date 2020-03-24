@@ -35,7 +35,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                 }
                 self.employeeJobs(new ArrayDataProvider(jobs, { keyAttributes: 'value' }));
             };
-            restutils.getRestData('jobs?sortBy=JobId:asc', null, successFn, function() { });
+            restutils.getRestData('jobs?sortBy=JobTitle:asc', null, successFn, function() { });
         })();
 
         self.validateUniqueEmployee = {
