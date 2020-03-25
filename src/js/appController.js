@@ -15,6 +15,8 @@ function (ResponsiveUtils, ResponsiveKnockoutUtils, ko, router, authconfig, rest
     self.appName = ko.observable("MENJ stack");
     self.userLogin = ko.observable('');
 
+    self.processing = ko.observable(false);
+
     // restconfig.setHost('http://localhost:3000');
     restconfig.setHost('https://menj-server.herokuapp.com');
 
@@ -36,6 +38,14 @@ function (ResponsiveUtils, ResponsiveKnockoutUtils, ko, router, authconfig, rest
 
     self.signoutAction = function () {
       authconfig.signout();
+    };
+
+    self.startProcessing = function() {
+      self.processing(true);
+    };
+
+    self.endProcessing = function() {
+      self.processing(false);
     };
 
   }

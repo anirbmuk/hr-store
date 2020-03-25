@@ -48,7 +48,8 @@ requirejs.config(
  */
 require(['ojs/ojbootstrap', 'knockout', 'appController', 
          './helper/storage-config', './helper/router-config', './helper/rest-config', './helper/message-helper', './helper/format-helper',
-         './state/auth-state', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu', 'ojs/ojmodule'],
+         './state/auth-state', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu', 'ojs/ojmodule',
+         'ojs/ojprogress'],
   function (Bootstrap, ko, app, storageconfig, routerconfig, restutils, messageutils, formatterutils, authconfig) {
 
       Bootstrap.whenDocumentReady().then(

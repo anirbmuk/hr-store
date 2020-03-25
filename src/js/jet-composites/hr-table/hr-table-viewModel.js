@@ -143,10 +143,12 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
               self.currentModel(datamodel);
               self.currentRow(datamodel.attributes);
               $(modalId)[0].open();
+              app.endProcessing();
             };
 
             const errorFn = function(err) {
               console.error(err);
+              app.endProcessing();
             };
 
             const fetchParams = {
@@ -155,6 +157,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
               error: errorFn
             };
             
+            app.startProcessing();
             if (handler === 'addHandler') {
               currentModel.fetch(fetchParams);
             } else if (handler === 'editHandler') {
@@ -167,12 +170,17 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
                 success: function() {
                   self.messages(self.buildMessage('confirmation', 'Data saved', 'Your changes have been saved', 3000));
                   self.refreshDatasource();
+                  app.endProcessing();
                 },
                 error: function(err) {
                   self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
+                  app.endProcessing();
                 },
                 wait: true
               });
+            } else {
+              self.messages(self.buildMessage('error', 'Operation error', `Operation ${handler} is not supported`, 3000));
+              app.endProcessing();
             }
           }
         };
@@ -185,10 +193,12 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
             self.messages(self.buildMessage('confirmation', 'Data saved', 'Your changes have been saved', 3000));
             self.refreshDatasource();
             $(modalId)[0].close();
+            app.endProcessing();
           };
 
           const errorFn = function(err) {
             self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
+            app.endProcessing();
           };
 
           const currentModel = new self.model();
@@ -196,6 +206,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           const data = self.currentRow();
 
           const saveAction = function() {
+            app.startProcessing();
             if (self.currentAction() === 'addHandler') {
               collection.create(data, {
                 beforeSend: restutils.beforeSend,

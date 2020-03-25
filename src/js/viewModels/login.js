@@ -38,16 +38,20 @@ define([
                 self.username('');
                 self.password('');
                 routerconfig.navigate('locations');
+                app.endProcessing();
             };
             const errorFn = function(error) {
                 self.errorMessage('Failed to authenticate to HR system');
+                app.endProcessing();
             }
             const tracker = $('#loginFormTracker')[0];
             if (tracker && tracker.valid === 'valid') {
+                app.startProcessing();
                 restutils.saveRestData('users/login', data, successFn, errorFn, 'POST');
             } else {
                 tracker.showMessages();
                 tracker.focusOn("@firstInvalidShown");
+                app.endProcessing();
             }
         };
     }
