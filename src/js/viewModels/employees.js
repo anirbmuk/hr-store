@@ -30,7 +30,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                 const jobs = [];
                 if (!!data && !!data.items && Array.isArray(data.items)) {
                     data.items.forEach(function(job) {
-                        jobs.push({ value: job.JobId, label: job.JobTitle });
+                        jobs.push({ value: job.JobId, label: `${job.JobId}: ${job.JobTitle}` });
                     });
                 }
                 self.employeeJobs(new ArrayDataProvider(jobs, { keyAttributes: 'value' }));
