@@ -65,7 +65,7 @@ function($, ko, KnockoutTemplateUtils) {
             const rowKey = event.detail.rowKey;
             const successFn = function(data) {
                 self.directDataObject({
-                    data: data.directs,
+                    data: !!data.directs ? data.directs.sort((a, b) => a.EmployeeId - b.EmployeeId) : [],
                     idAttribute: 'EmployeeId'
                 });
                 $('#md_directs')[0].refreshDatasource();
@@ -76,22 +76,6 @@ function($, ko, KnockoutTemplateUtils) {
                 app.endProcessing();
             }
             restutils.getRestData('employees/' + rowKey, { children: 'directs' }, successFn, errorFn);
-        };
-
-        self.parseDirect = function(response) {
-            return {
-                EmployeeId: response.EmployeeId,
-                FirstName: (response.FirstName === undefined ? '' : response.FirstName),
-                LastName: response.LastName,
-                Email: response.Email,
-                PhoneNumber: response.PhoneNumber,
-                HireDate: response.HireDate,
-                JobId: response.JobId,
-                Salary: response.Salary,
-                CommissionPct: response.CommissionPct,
-                ManagerId: response.ManagerId,
-                DepartmentId: response.DepartmentId,
-            };
         };
 
         self.directColumns = [

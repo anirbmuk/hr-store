@@ -295,7 +295,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
     HrTableModel.prototype.validateHandler = function(handler) {
       const self = this;
       if (handler === 'deleteHandler') {
-        if (!authconfig.hasWritePrivilege()) {
+        if (!authconfig.hasDeletePrivilege()) {
           self.messages(self.buildMessage('error', 'Unauthorized action', 'Delete operation is not allowed', 3000));
           return false;
         }
@@ -304,7 +304,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           return false;
         }
       } else if (handler === 'editHandler') {
-        if (!authconfig.hasWritePrivilege()) {
+        if (!authconfig.hasEditPrivilege()) {
           self.messages(self.buildMessage('error', 'Unauthorized action', 'Edit operation is not allowed', 3000));
           return false;
         }
@@ -313,7 +313,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           return false;
         }
       } else if (handler === 'addHandler') {
-        if (!authconfig.hasWritePrivilege()) {
+        if (!authconfig.hasCreatePrivilege()) {
           self.messages(self.buildMessage('error', 'Unauthorized action', 'Create operation is not allowed', 3000));
           return false;
         }

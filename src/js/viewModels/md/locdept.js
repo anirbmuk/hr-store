@@ -60,7 +60,7 @@ function($, ko) {
             const rowKey = event.detail.rowKey;
             const successFn = function(data) {
                 self.departmentDataObject({
-                    data: data.departments,
+                    data: !!data.departments ? data.departments.sort((a, b) => a.DepartmentId - b.DepartmentId) : [],
                     idAttribute: 'DepartmentId'
                 });
                 $('#md_departments')[0].refreshDatasource();

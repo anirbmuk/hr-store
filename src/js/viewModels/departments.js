@@ -5,7 +5,9 @@ function(ko) {
 
         const self = this;
 
-        self.hasWritePrivilege = ko.observable(authconfig.hasWritePrivilege());
+        self.hasCreatePrivilege = ko.observable(authconfig.hasCreatePrivilege());
+        self.hasEditPrivilege = ko.observable(authconfig.hasEditPrivilege());
+        self.hasDeletePrivilege = ko.observable(authconfig.hasDeletePrivilege());
 
         self.validateUniqueDepartment = {
             validate: function(value) {
@@ -76,21 +78,21 @@ function(ko) {
                     label: 'Create',
                     iconOnly: false,
                     handler: 'addHandler',
-                    disabled: !authconfig.hasWritePrivilege()
+                    disabled: !authconfig.hasCreatePrivilege()
                 },
                 {
                     name: 'edit',
                     label: 'Edit',
                     iconOnly: false,
                     handler: 'editHandler',
-                    disabled: !authconfig.hasWritePrivilege()
+                    disabled: !authconfig.hasEditPrivilege()
                 },
                 {
                     name: 'delete',
                     label: 'Delete',
                     iconOnly: false,
                     handler: 'deleteHandler',
-                    disabled: !authconfig.hasWritePrivilege()
+                    disabled: !authconfig.hasDeletePrivilege()
                 }
             ],
             selection: {

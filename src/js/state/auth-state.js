@@ -18,11 +18,29 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
         return (hasToken && hasEmail && hasRole);
     };
 
-    AuthStateConfig.prototype.hasWritePrivilege = function() {
+    AuthStateConfig.prototype.hasCreatePrivilege = function() {
         const isAuthenticated = this.isAuthenticated();
         if (isAuthenticated) {
             const role = this.role();
-            return (role === 'HR_MANAGER');
+            return (role === 'HR_MANAGER' || role === 'HR_ADMIN');
+        }
+        return false;
+    };
+
+    AuthStateConfig.prototype.hasEditPrivilege = function() {
+        const isAuthenticated = this.isAuthenticated();
+        if (isAuthenticated) {
+            const role = this.role();
+            return (role === 'HR_MANAGER' || role === 'HR_ADMIN');
+        }
+        return false;
+    };
+
+    AuthStateConfig.prototype.hasDeletePrivilege = function() {
+        const isAuthenticated = this.isAuthenticated();
+        if (isAuthenticated) {
+            const role = this.role();
+            return (role === 'HR_ADMIN');
         }
         return false;
     };
