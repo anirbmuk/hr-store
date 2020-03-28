@@ -1,0 +1,51 @@
+<h1>Data Visualization</h1>
+<hr>
+<div id="chart-container" class="oj-margin oj-flex oj-sm-flex-items-initial oj-sm-justify-content-center">
+    <oj-chart id="pieChart"
+              type="pie"
+              data="[[chartDataProvider]]"
+              selection-mode="single"
+              selection="{{selectedJobId}}"
+              animation-on-display="auto"
+              animation-on-data-change="auto"
+              translations.label-value="Count"
+              translations.label-series="Job Id"
+              legend.title="Jobs">
+        <template slot='itemTemplate' data-oj-as='item'>
+            <oj-chart-item value='[[item.data.value]]'
+                           group-id='[[ [item.data.group] ]]'
+                           series-id='[[item.data.series]]'>
+            </oj-chart-item>
+        </template>
+    </oj-chart>
+</div>
+<div id="table-container">
+    <h5><oj-bind-text value="[[tableTitle]]"></oj-bind-text></h5>
+    <hr>
+    <hr-table id="employees_with_jobs"
+              component-id="employeeswithjobs"
+              table-properties="[[employeeTableProperties]]"
+              paging-properties="[[employeePagingProperties]]"
+              data-object="[[employeeDataObject]]">
+    </hr-table>
+</div>
+<script type="text/html" id="employee_hd_template">
+    <td>
+        <oj-bind-text value="[[$parent.templateProperties.employeeHireDate($context.row.HireDate)]]"></oj-bind-text>
+    </td>
+</script>
+<script type="text/html" id="employee_pn_template">
+    <td>
+        <oj-bind-text value="[[$parent.templateProperties.employeePhoneNumber($context.row.PhoneNumber)]]"></oj-bind-text>
+    </td>
+</script>
+<script type="text/html" id="employee_sa_template">
+    <td>
+        <oj-bind-text value="[[$parent.templateProperties.employeeSalary($context.row.Salary)]]"></oj-bind-text>
+    </td>
+</script>
+<script type="text/html" id="employee_fn_ln_template">
+    <td>
+        <oj-bind-text value="[[$context.row.FirstName + ' ' + $context.row.LastName]]"></oj-bind-text>
+    </td>
+</script>
