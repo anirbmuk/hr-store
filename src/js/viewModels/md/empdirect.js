@@ -57,10 +57,11 @@ function($, ko, KnockoutTemplateUtils) {
 
         self.employeePagingProperties = {
             pagingEnabled: true,
-            pageSize: 4
+            pageSize: 5
         };
 
         self.onRowSelectionChange = function(event) {
+            app.startProcessing();
             const rowKey = event.detail.rowKey;
             const successFn = function(data) {
                 self.directDataObject({
@@ -68,9 +69,11 @@ function($, ko, KnockoutTemplateUtils) {
                     idAttribute: 'EmployeeId'
                 });
                 $('#md_directs')[0].refreshDatasource();
+                app.endProcessing();
             };
             const errorFn = function(error) {
                 console.error(error);
+                app.endProcessing();
             }
             restutils.getRestData('employees/' + rowKey, { children: 'directs' }, successFn, errorFn);
         };
@@ -108,7 +111,7 @@ function($, ko, KnockoutTemplateUtils) {
 
         self.directPagingProperties = {
             pagingEnabled: true,
-            pageSize: 4
+            pageSize: 5
         };
     }
 

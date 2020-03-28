@@ -51,15 +51,18 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
     };
 
     AuthStateConfig.prototype.signout = function() {
+        app.startProcessing();
         const successFn = function(data) {
             this.setAuthState({});
             storageconfig.clearAllApplicationsKeys();
             routerconfig.navigate('login');
+            app.endProcessing();
         }.bind(this);
         const errorFn = function(error) {
             this.setAuthState({});
             storageconfig.clearAllApplicationsKeys();
             routerconfig.navigate('login');
+            app.endProcessing();
         }.bind(this);
         restutils.saveRestData('users/logout', null, successFn, errorFn, 'POST');
     };

@@ -52,10 +52,11 @@ function($, ko) {
 
         self.locationPagingProperties = {
             pagingEnabled: true,
-            pageSize: 4
+            pageSize: 5
         };
 
         self.onRowSelectionChange = function(event) {
+            app.startProcessing();
             const rowKey = event.detail.rowKey;
             const successFn = function(data) {
                 self.departmentDataObject({
@@ -63,9 +64,11 @@ function($, ko) {
                     idAttribute: 'DepartmentId'
                 });
                 $('#md_departments')[0].refreshDatasource();
+                app.endProcessing();
             };
             const errorFn = function(error) {
                 console.error(error);
+                app.endProcessing();
             }
             restutils.getRestData('locations/' + rowKey, { children: 'departments' }, successFn, errorFn);
         };
@@ -97,7 +100,7 @@ function($, ko) {
 
         self.departmentPagingProperties = {
             pagingEnabled: true,
-            pageSize: 4
+            pageSize: 5
         };
     }
 
