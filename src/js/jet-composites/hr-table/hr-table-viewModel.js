@@ -138,32 +138,39 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           if (validhandler) {
             const currentModel = new self.model();
             self.currentAction(handler);
+            app.startProcessing();
 
-            const successFn = function(datamodel) {
-              self.currentModel(datamodel);
-              self.currentRow(datamodel.attributes);
+            if (handler === 'addHandler') {
+
+              self.currentRow(currentModel.attributes);
               $(modalId)[0].open();
               app.endProcessing();
-            };
 
-            const errorFn = function(err) {
-              self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
-              app.endProcessing();
-            };
-
-            const fetchParams = {
-              beforeSend: restutils.beforeSend,
-              success: successFn,
-              error: errorFn
-            };
-            
-            app.startProcessing();
-            if (handler === 'addHandler') {
-              currentModel.fetch(fetchParams);
             } else if (handler === 'editHandler') {
+
+              const successFn = function(datamodel) {
+                self.currentModel(datamodel);
+                self.currentRow(datamodel.attributes);
+                $(modalId)[0].open();
+                app.endProcessing();
+              };
+  
+              const errorFn = function(err) {
+                self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
+                app.endProcessing();
+              };
+  
+              const fetchParams = {
+                beforeSend: restutils.beforeSend,
+                success: successFn,
+                error: errorFn
+              };
+
               currentModel.id = self.currentRowKey();
               currentModel.fetch(fetchParams);
+
             } else if (handler === 'deleteHandler') {
+
               currentModel.id = self.currentRowKey();
               currentModel.destroy({
                 beforeSend: restutils.beforeSend,

@@ -12,6 +12,7 @@ define(['knockout', 'ojs/ojrouter'], function(ko) {
         if (app.authenticated()) {
             return true;
         }
+        return false;
     };
 
     const appRoutes = {
@@ -41,7 +42,7 @@ define(['knockout', 'ojs/ojrouter'], function(ko) {
     };
 
     RouterConfigUtils.prototype.navigate = function(path) {
-        this.router().go(path)
+        this.router().go(path);
     };
 
     return new RouterConfigUtils();
