@@ -58,37 +58,6 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
             return data;
         };
 
-        (function() {
-            app.startProcessing();
-            const successFn = function(data) {
-                const employees = [];
-                const jobs = [];
-                const chartData = [];
-
-                if (!!data && !!data.items && Array.isArray(data.items)) {
-                    data.items.forEach(employee => employees.push(employee));
-                }
-                self.allEmployees(employees);
-
-                employees.forEach(employee => {
-                    if(!!employee.JobId && jobs.indexOf(employee.JobId) < 0) {
-                        jobs.push(employee.JobId);
-                    }
-                });
-
-                jobs.forEach((jobId, index) => chartData.push(self.buildChartData(index, jobId, employees)));
-
-                self.chartDataProvider(new ArrayDataProvider(chartData, { keyAttributes: 'id' }));
-
-                app.endProcessing();
-            };
-
-            const errorFn = function(error) {
-                app.endProcessing();
-            }
-            restutils.getRestData('employees?sortBy=EmployeeId:desc', null, successFn, errorFn);
-        })();
-
         self.employeeColumns = [
             { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Name', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
@@ -111,6 +80,40 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
         };
 
     }
+
+    VisualizationViewModel.prototype.handleActivated = function(context) {
+        const self = this;
+        app.startProcessing();
+
+        const successFn = function(data) {
+            const employees = [];
+            const jobs = [];
+            const chartData = [];
+
+            if (!!data && !!data.items && Array.isArray(data.items)) {
+                data.items.forEach(employee => employees.push(employee));
+            }
+            self.allEmployees(employees);
+
+            employees.forEach(employee => {
+                if(!!employee.JobId && jobs.indexOf(employee.JobId) < 0) {
+                    jobs.push(employee.JobId);
+                }
+            });
+
+            jobs.forEach((jobId, index) => chartData.push(self.buildChartData(index, jobId, employees)));
+
+            self.chartDataProvider(new ArrayDataProvider(chartData, { keyAttributes: 'id' }));
+
+            app.endProcessing();
+        };
+
+        const errorFn = function(error) {
+            app.endProcessing();
+        }
+
+        restutils.getRestData('employees?sortBy=EmployeeId:desc', null, successFn, errorFn);
+    };
 
     VisualizationViewModel.prototype.dispose = function() {
         if (!!this.selectedJobIdSubscription) {
