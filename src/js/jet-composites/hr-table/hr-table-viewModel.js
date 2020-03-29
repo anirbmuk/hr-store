@@ -147,7 +147,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
             };
 
             const errorFn = function(err) {
-              console.error(err);
+              self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
               app.endProcessing();
             };
 

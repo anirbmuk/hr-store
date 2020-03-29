@@ -182,6 +182,15 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                 urlPath: self.urlPath,
                 idAttribute: self.idAttribute,
                 parse: self.parseEmployee
+            },
+            preSave: function(data) {
+                return new Promise(function(resolve, reject) {
+                    if (data.EmployeeId === data.ManagerId) {
+                        reject('EmployeeId cannot be same as ManagerId');
+                    } else{
+                        resolve();
+                    }
+                });
             }
         };
 
