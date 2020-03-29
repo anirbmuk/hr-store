@@ -50,11 +50,11 @@ function(ko, ValidationBase) {
         self.urlPath = 'locations';
 
         self.locationColumns = [
-            { headerText: 'LocationId Id', field: 'LocationId' },
-            { headerText: 'Street Address', field: 'StreetAddress', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'Location Id', field: 'LocationId' },
+            { headerText: 'Address', field: 'StreetAddress', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'City', field: 'City' },
-            { headerText: 'State / Province', field: 'StateProvince', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: 'State', field: 'StateProvince', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Country', field: 'CountryId' }
         ];
 
@@ -90,13 +90,13 @@ function(ko, ValidationBase) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', required: true, editable: 'while-new',
+                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber', label: 'Id', required: true, editable: 'while-new',
                       asyncvalidators: [ self.asyncvalidators[0] ] },
-                    { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText', label: 'Street Address', editable: 'always' },
+                    { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText', label: 'Address', editable: 'always' },
                     { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText', label: 'Postal Code', editable: 'always',
                       validators: [ self.validators[0] ] },
                     { componentId: 'location_ct', field: 'City', component: 'ojInputText', label: 'City', required: true, editable: 'always' },
-                    { componentId: 'location_sp', field: 'StateProvince', component: 'ojInputText', label: 'State / Province', editable: 'always' },
+                    { componentId: 'location_sp', field: 'StateProvince', component: 'ojInputText', label: 'State', editable: 'always' },
                     { componentId: 'location_ci', field: 'CountryId', component: 'ojInputText', label: 'Country', editable: 'always',
                       validators: [ self.validators[1] ] },
                 ]

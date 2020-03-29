@@ -27,7 +27,7 @@ function($, ko) {
         self.urlPath = 'locations';
 
         self.locationColumns = [
-            { headerText: 'LocationId Id', field: 'LocationId' },
+            { headerText: 'Location Id', field: 'LocationId' },
             { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'City', field: 'City' },
             { headerText: 'Country', field: 'CountryId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
@@ -52,7 +52,7 @@ function($, ko) {
 
         self.locationPagingProperties = {
             pagingEnabled: true,
-            pageSize: 5
+            pageSize: 6
         };
 
         self.onRowSelectionChange = function(event) {
@@ -67,7 +67,6 @@ function($, ko) {
                 app.endProcessing();
             };
             const errorFn = function(error) {
-                console.error(error);
                 app.endProcessing();
             }
             restutils.getRestData('locations/' + rowKey, { children: 'departments' }, successFn, errorFn);
@@ -100,7 +99,7 @@ function($, ko) {
 
         self.departmentPagingProperties = {
             pagingEnabled: true,
-            pageSize: 5
+            pageSize: 6
         };
     }
 

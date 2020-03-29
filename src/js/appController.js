@@ -27,8 +27,7 @@ function (ResponsiveUtils, ResponsiveKnockoutUtils, ko, router, authconfig, rest
     self.activeRoutes = router.getActiveRoutes();
 
     self.authenticated = ko.computed(function () {
-
-    self.userLogin(authconfig.getAuthState().email());
+      self.userLogin(authconfig.getAuthState().email());
       return authconfig.getAuthState().token() !== null;
     }, self);
 

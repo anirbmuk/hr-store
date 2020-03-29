@@ -22,7 +22,7 @@
 </div>
 <div id="addOrEditDialogWrapper">
   <oj-dialog :id="[[componentId + '_addOrEditDialog']]"
-    dialog-title="[[currentAction() === 'addHandler' ? 'Create' : 'Edit']]" style="display: none; width: 80vw;"
+    dialog-title="[[currentAction() === 'addHandler' ? 'Create' : 'Edit']]" initial-visibility="hide" style="width: 90vw;"
     cancel-behavior="none">
     <div slot="body">
       <oj-validation-group :id="[[componentId + '_addOrEditFormTracker']]">

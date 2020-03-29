@@ -57,7 +57,7 @@ function($, ko, KnockoutTemplateUtils) {
 
         self.employeePagingProperties = {
             pagingEnabled: true,
-            pageSize: 5
+            pageSize: 6
         };
 
         self.onRowSelectionChange = function(event) {
@@ -72,7 +72,6 @@ function($, ko, KnockoutTemplateUtils) {
                 app.endProcessing();
             };
             const errorFn = function(error) {
-                console.error(error);
                 app.endProcessing();
             }
             restutils.getRestData('employees/' + rowKey, { children: 'directs' }, successFn, errorFn);
@@ -95,7 +94,7 @@ function($, ko, KnockoutTemplateUtils) {
 
         self.directPagingProperties = {
             pagingEnabled: true,
-            pageSize: 5
+            pageSize: 6
         };
     }
 

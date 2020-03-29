@@ -114,7 +114,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
 
         self.employeeColumns = [
             { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: 'Name', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
             { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: 'Email', field: 'Email' },
@@ -157,7 +157,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber', label: 'Employee Id', required: true,
+                    { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber', label: 'Id', required: true,
                       editable: 'while-new', asyncvalidators: [ self.asyncvalidators[0] ] },
                     { componentId: 'employee_fn', field: 'FirstName', component: 'ojInputText', label: 'First Name', editable: 'always' },
                     { componentId: 'employee_ln', field: 'LastName', component: 'ojInputText', label: 'Last Name', required: true, editable: 'always' },
@@ -165,13 +165,13 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                       validators: [ self.validators[0] ] },
                     { componentId: 'employee_pn', field: 'PhoneNumber', component: 'ojInputText', label: 'Phone', editable: 'always' },
                     { componentId: 'employee_hd', field: 'HireDate', component: 'ojInputDate', label: 'Hire Date', required: true, editable: 'always' },
-                    { componentId: 'employee_ji', field: 'JobId', component: 'ojSelectOne', label: 'Job Id', required: true, editable: 'always',
+                    { componentId: 'employee_ji', field: 'JobId', component: 'ojSelectOne', label: 'Job', required: true, editable: 'always',
                       options: self.employeeJobs },
                     { componentId: 'employee_sa', field: 'Salary', component: 'ojInputNumber', label: 'Salary', editable: 'always' },
                     { componentId: 'employee_cp', field: 'CommissionPct', component: 'ojInputNumber', label: 'Commission', editable: 'always' },
-                    { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always',
+                    { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager', editable: 'always',
                       asyncvalidators: [ self.asyncvalidators[1] ] },
-                    { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department Id', editable: 'always',
+                    { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department', editable: 'always',
                       asyncvalidators: [ self.asyncvalidators[2] ] }
                 ]
             }

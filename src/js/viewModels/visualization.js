@@ -29,7 +29,7 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
 
             if (selectedPieIndex !== undefined) {
                 const selectedJobId = chartData[selectedPieIndex].series;
-                self.tableTitle(`Employees with JobId ${selectedJobId}`);
+                self.tableTitle(`Employees with job ${selectedJobId}`);
                 const employeesWithThisJobId = employeeData.filter(employee => employee.JobId === selectedJobId)
                                                            .sort((a, b) => a.EmployeeId - b.EmployeeId);
                 self.employeeDataObject({
@@ -91,7 +91,7 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
 
         self.employeeColumns = [
             { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: 'Name', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
             { headerText: 'Email', field: 'Email' },
             { headerText: 'Job Id', field: 'JobId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
         ];
@@ -107,7 +107,7 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
 
         self.employeePagingProperties = {
             pagingEnabled: true,
-            pageSize: 5
+            pageSize: 6
         };
 
     }

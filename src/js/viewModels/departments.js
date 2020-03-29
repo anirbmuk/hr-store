@@ -101,12 +101,12 @@ function(ko) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'department_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department Id', required: true, editable: 'while-new',
+                    { componentId: 'department_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Id', required: true, editable: 'while-new',
                       asyncvalidators: [ self.asyncvalidators[0] ] },
-                    { componentId: 'department_dn', field: 'DepartmentName', component: 'ojInputText', label: 'Department Name', required: true, editable: 'always' },
-                    { componentId: 'department_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager Id', editable: 'always',
+                    { componentId: 'department_dn', field: 'DepartmentName', component: 'ojInputText', label: 'Name', required: true, editable: 'always' },
+                    { componentId: 'department_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager', editable: 'always',
                       asyncvalidators: [ self.asyncvalidators[1] ] },
-                    { componentId: 'department_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location Id', editable: 'always',
+                    { componentId: 'department_li', field: 'LocationId', component: 'ojInputNumber', label: 'Location', editable: 'always',
                       asyncvalidators: [ self.asyncvalidators[2] ] }
                 ]
             }
