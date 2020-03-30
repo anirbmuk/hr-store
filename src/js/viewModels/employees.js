@@ -193,7 +193,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                                 if (!!department && department.ManagerId === data.ManagerId) {
                                     resolve();
                                 } else {
-                                    reject(`Employee with Id ${data.EmployeeId} is not the manager of department ${data.DepartmentId}`);
+                                    reject(`Employee with Id ${data.ManagerId} is not the manager of department ${data.DepartmentId}`);
                                 }
                             };
                             const errorFn = function() {
