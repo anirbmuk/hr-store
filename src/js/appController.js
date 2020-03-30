@@ -17,8 +17,8 @@ function (ResponsiveUtils, ResponsiveKnockoutUtils, ko, router, authconfig, rest
 
     self.processing = ko.observable(false);
 
-    // restconfig.setHost('http://localhost:3000');
-    restconfig.setHost('https://menj-server.herokuapp.com');
+    // restconfig.setHost('http://localhost:3000'); // Development server
+    restconfig.setHost('https://menj-server.herokuapp.com'); // Production server
 
     var smQuery = ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
     self.smScreen = ResponsiveKnockoutUtils.createMediaQueryObservable(smQuery);

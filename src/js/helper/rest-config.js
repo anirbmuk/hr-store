@@ -56,7 +56,7 @@ define(['ojs/ojmodel', 'knockout', 'jquery'], function(oj, ko, $) {
     };
 
     RestUtils.prototype.saveRestData = function(url, data, successCallback, errorCallback, type) {
-        if (type && type === 'GET') {
+        if (!type || type === 'GET') {
             return this.getRestData(url, null, successCallback, errorCallback);
         }
         const ajaxObject = {

@@ -239,9 +239,12 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
                 self.messages(self.buildMessage('error', 'Validation error', 'There are validation errors on the form', 3000));
               }
             } else if (preSaveValidation instanceof Promise) {
+              app.startProcessing();
               preSaveValidation.then(function() {
+                app.endProcessing();
                 saveAction();
               }).catch(function(error) {
+                app.endProcessing();
                 self.messages(self.buildMessage('error', 'Validation error', error, 3000));
               });
             }

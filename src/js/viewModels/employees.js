@@ -187,8 +187,22 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                 return new Promise(function(resolve, reject) {
                     if (data.EmployeeId === data.ManagerId) {
                         reject('EmployeeId cannot be same as ManagerId');
-                    } else{
-                        resolve();
+                    } else {
+                        if (!!data.DepartmentId && data.ManagerId) {
+                            const successFn = function(department) {
+                                if (!!department && department.ManagerId === data.ManagerId) {
+                                    resolve();
+                                } else {
+                                    reject(`Employee with Id ${data.EmployeeId} is not the manager of department ${data.DepartmentId}`);
+                                }
+                            };
+                            const errorFn = function() {
+                                resolve();
+                            }
+                            restutils.getRestData('departments/' + data.DepartmentId, null, successFn, errorFn);
+                        } else {
+                            resolve();
+                        }
                     }
                 });
             }
