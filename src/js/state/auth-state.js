@@ -81,7 +81,7 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
         const successFn = function(data) {
             this.setAuthState({});
             storageconfig.clearAllApplicationsKeys();
-            routerconfig.redirect('login');
+            routerconfig.redirect();
             app.endProcessing();
         }.bind(this);
         const errorFn = function(error) {

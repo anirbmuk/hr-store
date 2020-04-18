@@ -55,7 +55,10 @@ define(['knockout', './i18n-helper', 'ojs/ojrouter'], function(ko, i18nutils) {
     };
 
     RouterConfigUtils.prototype.redirect = function(path) {
-        return window.location = '?root=' + path;
+        if (!!path) {
+            return window.location = '?root=' + path;
+        }
+        return window.location = '/';
     };
 
     return new RouterConfigUtils();
