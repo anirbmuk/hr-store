@@ -12,8 +12,8 @@ function(ko, ModuleElementUtils) {
         const self = this;
 
         self.mdTabs = [
-            { id: 'locdept', label: 'Locations & Departments' },
-            { id: 'empdirect', label: 'Employees & Directs' },
+            { id: 'locdept', label: i18nutils.translate('masterdetail.locdept_tab') },
+            { id: 'empdirect', label: i18nutils.translate('masterdetail.empdirect_tab') },
         ];
 
         self.currentTab = ko.observable('locdept');

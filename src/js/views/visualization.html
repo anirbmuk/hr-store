@@ -10,9 +10,9 @@
               selection="{{selectedJobId}}"
               animation-on-display="auto"
               animation-on-data-change="auto"
-              translations.label-value="Count"
-              translations.label-series="Job Id"
-              legend.title="Jobs">
+              translations.label-value="[[i18nutils.translate('labels.count')]]"
+              translations.label-series="[[i18nutils.translate('attributes.employees.JobId')]]"
+              legend.title="[[i18nutils.translate('labels.jobs')]]">
         <template slot='itemTemplate' data-oj-as='item'>
             <oj-chart-item value='[[item.data.value]]'
                            group-id='[[ [item.data.group] ]]'

@@ -1,6 +1,8 @@
 <div class="oj-flex">
     <div class="oj-sm-12 oj-md-6 oj-lg-6">
-        <h5><strong>Locations</strong></h5>
+        <h5><strong>
+            <oj-bind-text value="[[i18nutils.translate('masterdetail.locations')]]"></oj-bind-text>
+        </strong></h5>
         <hr>
         <hr-table id="md_locations"
                   component-id="locations"
@@ -11,7 +13,9 @@
         </hr-table>
     </div>
     <div class="oj-sm-12 oj-md-6 oj-lg-6">
-        <h5><strong>Departments</strong></h5>
+        <h5><strong>
+            <oj-bind-text value="[[i18nutils.translate('masterdetail.departments')]]"></oj-bind-text>
+        </strong></h5>
         <hr>
         <hr-table id="md_departments"
                   component-id="departments"

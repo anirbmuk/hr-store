@@ -16,15 +16,15 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
         self.messages = {
             duplicate_employee: i18nutils.translate('messages.employees.duplicate_employee'),
             not_exist_employee: i18nutils.translate('messages.employees.not_exist_employee'),
-            not_exist_department: i18nutils.translate('messages.employees.not_exist_department'),
+            not_exist_department: i18nutils.translate('messages.departments.not_exist_department'),
             email_not_formatted: i18nutils.translate('messages.employees.email_not_formatted'),
             manager_employee_diff: i18nutils.translate('messages.employees.manager_employee_diff'),
             manager_employee_valid: function(manager, department) {
                 return i18nutils.translate('messages.employees.manager_employee_valid', {
                     manager: manager,
                     department: department
-                })
-            },
+                });
+            }
         };
 
         self.getDateFormatter = function(date) {
@@ -133,16 +133,21 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
         self.urlPath = 'employees';
 
         self.employeeColumns = [
-            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Name', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
-            { headerText: 'Phone', renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Hire Date', renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Email', field: 'Email' },
-            { headerText: 'Job Id', field: 'JobId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Salary', renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Commission', field: 'CommissionPct', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Department Id', field: 'DepartmentId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
+            { headerText: i18nutils.translate('attributes.employees.EmployeeId'), field: 'EmployeeId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Name'), renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: i18nutils.translate('attributes.employees.Phone'), renderer: KnockoutTemplateUtils.getRenderer('employee_pn_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.HireDate'), renderer: KnockoutTemplateUtils.getRenderer('employee_hd_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Email'), field: 'Email' },
+            { headerText: i18nutils.translate('attributes.employees.JobId'), field: 'JobId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Salary'), renderer: KnockoutTemplateUtils.getRenderer('employee_sa_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Commission'), field: 'CommissionPct',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.ManagerId'), field: 'ManagerId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.DepartmentId'), field: 'DepartmentId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.employeeTableProperties = {
@@ -151,21 +156,21 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             toolbar: [
                 {
                     name: 'create',
-                    label: 'Create',
+                    label: i18nutils.translate('actions.create'),
                     iconOnly: false,
                     handler: 'addHandler',
                     disabled: !authconfig.hasCreatePrivilege()
                 },
                 {
                     name: 'edit',
-                    label: 'Edit',
+                    label: i18nutils.translate('actions.edit'),
                     iconOnly: false,
                     handler: 'editHandler',
                     disabled: !authconfig.hasEditPrivilege()
                 },
                 {
                     name: 'delete',
-                    label: 'Delete',
+                    label: i18nutils.translate('actions.delete'),
                     iconOnly: false,
                     handler: 'deleteHandler',
                     disabled: !authconfig.hasDeletePrivilege()
@@ -177,21 +182,32 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber', label: 'Id', required: true,
+                    { componentId: 'employee_ei', field: 'EmployeeId', component: 'ojInputNumber',
+                      label: i18nutils.translate('attributes.employees.EmployeeId'), required: true,
                       editable: 'while-new', asyncvalidators: [ self.asyncvalidators[0] ] },
-                    { componentId: 'employee_fn', field: 'FirstName', component: 'ojInputText', label: 'First Name', editable: 'always' },
-                    { componentId: 'employee_ln', field: 'LastName', component: 'ojInputText', label: 'Last Name', required: true, editable: 'always' },
-                    { componentId: 'employee_em', field: 'Email', component: 'ojInputText', label: 'Email', required: true, editable: 'always',
+                    { componentId: 'employee_fn', field: 'FirstName', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.employees.FirstName'), editable: 'always' },
+                    { componentId: 'employee_ln', field: 'LastName', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.employees.LastName'), required: true, editable: 'always' },
+                    { componentId: 'employee_em', field: 'Email', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.employees.Email'), required: true, editable: 'always',
                       validators: [ self.validators[0] ] },
-                    { componentId: 'employee_pn', field: 'PhoneNumber', component: 'ojInputText', label: 'Phone', editable: 'always' },
-                    { componentId: 'employee_hd', field: 'HireDate', component: 'ojInputDate', label: 'Hire Date', required: true, editable: 'always' },
-                    { componentId: 'employee_ji', field: 'JobId', component: 'ojSelectOne', label: 'Job', required: true, editable: 'always',
+                    { componentId: 'employee_pn', field: 'PhoneNumber', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.employees.Phone'), editable: 'always' },
+                    { componentId: 'employee_hd', field: 'HireDate', component: 'ojInputDate',
+                      label: i18nutils.translate('attributes.employees.HireDate'), required: true, editable: 'always' },
+                    { componentId: 'employee_ji', field: 'JobId', component: 'ojSelectOne',
+                      label: i18nutils.translate('attributes.employees.JobId'), required: true, editable: 'always',
                       options: self.employeeJobs },
-                    { componentId: 'employee_sa', field: 'Salary', component: 'ojInputNumber', label: 'Salary', editable: 'always' },
-                    { componentId: 'employee_cp', field: 'CommissionPct', component: 'ojInputNumber', label: 'Commission', editable: 'always' },
-                    { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber', label: 'Manager', editable: 'always',
+                    { componentId: 'employee_sa', field: 'Salary', component: 'ojInputNumber',
+                      label: i18nutils.translate('attributes.employees.Salary'), editable: 'always' },
+                    { componentId: 'employee_cp', field: 'CommissionPct', component: 'ojInputNumber',
+                      label: i18nutils.translate('attributes.employees.Commission'), editable: 'always' },
+                    { componentId: 'employee_mi', field: 'ManagerId', component: 'ojInputNumber',
+                      label: i18nutils.translate('attributes.employees.ManagerId'), editable: 'always',
                       asyncvalidators: [ self.asyncvalidators[1] ] },
-                    { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber', label: 'Department', editable: 'always',
+                    { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber',
+                      label: i18nutils.translate('attributes.employees.DepartmentId'), editable: 'always',
                       asyncvalidators: [ self.asyncvalidators[2] ] }
                 ]
             }
@@ -241,7 +257,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
 
         self.employeeSearchProperties = {
             showSearch: true,
-            searchPlaceholder: 'Search...'
+            searchPlaceholder: i18nutils.translate('labels.search')
         }
 
     }

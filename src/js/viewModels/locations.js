@@ -93,15 +93,18 @@ function(ko, ValidationBase) {
             edit: {
                 attributes: [
                     { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber',
-                      label: 'Id', required: true, editable: 'while-new',
+                      label: i18nutils.translate('attributes.locations.LocationId'), required: true, editable: 'while-new',
                       asyncvalidators: [ self.asyncvalidators[0] ] },
-                    { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText', label: 'Address', editable: 'always' },
-                    { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText', label: 'Postal Code', editable: 'always',
-                      validators: [ self.validators[0] ] },
-                    { componentId: 'location_ct', field: 'City', component: 'ojInputText', label: 'City', required: true, editable: 'always' },
-                    { componentId: 'location_sp', field: 'StateProvince', component: 'ojInputText', label: 'State', editable: 'always' },
-                    { componentId: 'location_ci', field: 'CountryId', component: 'ojInputText', label: 'Country', editable: 'always',
-                      validators: [ self.validators[1] ] },
+                    { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.locations.Address'), editable: 'always' },
+                    { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.locations.PostalCode'), editable: 'always', validators: [ self.validators[0] ] },
+                    { componentId: 'location_ct', field: 'City', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.locations.City'), required: true, editable: 'always' },
+                    { componentId: 'location_sp', field: 'StateProvince', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.locations.State'), editable: 'always' },
+                    { componentId: 'location_ci', field: 'CountryId', component: 'ojInputText',
+                      label: i18nutils.translate('attributes.locations.Country'), editable: 'always', validators: [ self.validators[1] ] },
                 ]
             }
         };

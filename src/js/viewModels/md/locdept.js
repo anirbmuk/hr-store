@@ -27,10 +27,12 @@ function($, ko) {
         self.urlPath = 'locations';
 
         self.locationColumns = [
-            { headerText: 'Location Id', field: 'LocationId' },
-            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'City', field: 'City' },
-            { headerText: 'Country', field: 'CountryId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
+            { headerText: i18nutils.translate('attributes.locations.LocationId'), field: 'LocationId' },
+            { headerText: i18nutils.translate('attributes.locations.PostalCode'), field: 'PostalCode',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.locations.City'), field: 'City' },
+            { headerText: i18nutils.translate('attributes.locations.Country'), field: 'CountryId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.locationTableProperties = {
@@ -82,10 +84,12 @@ function($, ko) {
         };
 
         self.departmentColumns = [
-            { headerText: 'Department Id', field: 'DepartmentId' },
-            { headerText: 'Department Name', field: 'DepartmentName' },
-            { headerText: 'Manager Id', field: 'ManagerId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Location Id', field: 'LocationId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
+            { headerText: i18nutils.translate('attributes.departments.DepartmentId'), field: 'DepartmentId' },
+            { headerText: i18nutils.translate('attributes.departments.DepartmentName'), field: 'DepartmentName' },
+            { headerText: i18nutils.translate('attributes.departments.ManagerId'), field: 'ManagerId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.departments.LocationId'), field: 'LocationId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.departmentTableProperties = {

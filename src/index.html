@@ -44,6 +44,8 @@
                 <span>
                   <oj-bind-text value="[[navigationMenuLabel]]"></oj-bind-text>
                 </span>
+                <span :title="[[navigationMenuLabel]]" role="img" slot="startIcon"
+                  class="demo-icon-font demo-home-icon-24"></span>
                 <oj-menu id="menu1" slot="menu" on-oj-action="[[menuAction]]">
                   <oj-bind-for-each data="[[activeRoutes]]">
                     <template>

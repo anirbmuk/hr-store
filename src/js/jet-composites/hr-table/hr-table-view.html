@@ -22,7 +22,8 @@
 </div>
 <div id="addOrEditDialogWrapper">
   <oj-dialog :id="[[componentId + '_addOrEditDialog']]"
-    dialog-title="[[currentAction() === 'addHandler' ? 'Create' : 'Edit']]" initial-visibility="hide" style="width: 90vw;"
+    dialog-title="[[currentAction() === 'addHandler' ? i18nutils.translate('actions.create') : i18nutils.translate('actions.edit')]]"
+    initial-visibility="hide" style="width: 90vw;"
     cancel-behavior="none">
     <div slot="body">
       <oj-validation-group :id="[[componentId + '_addOrEditFormTracker']]">
@@ -62,9 +63,11 @@
       </oj-validation-group>
     </div>
     <div slot="footer">
-      <oj-button :id="[[componentId + '_addOrEditDialog_saveButton']]" on-oj-action="[[addOrEditModelSave]]">Save
+      <oj-button :id="[[componentId + '_addOrEditDialog_saveButton']]" on-oj-action="[[addOrEditModelSave]]">
+        <oj-bind-text value="[[i18nutils.translate('actions.save')]]"></oj-bind-text>
       </oj-button>
-      <oj-button :id="[[componentId + '_addOrEditDialog_cancelButton']]" on-oj-action="[[addOrEditModelCancel]]">Cancel
+      <oj-button :id="[[componentId + '_addOrEditDialog_cancelButton']]" on-oj-action="[[addOrEditModelCancel]]">
+        <oj-bind-text value="[[i18nutils.translate('actions.cancel')]]"></oj-bind-text>
       </oj-button>
     </div>
   </oj-dialog>

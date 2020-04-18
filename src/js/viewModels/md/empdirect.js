@@ -33,9 +33,10 @@ function($, ko, KnockoutTemplateUtils) {
         self.urlPath = 'employees';
 
         self.employeeColumns = [
-            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
-            { headerText: 'Email', field: 'Email' }
+            { headerText: i18nutils.translate('attributes.employees.EmployeeId'), field: 'EmployeeId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Name'), renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: i18nutils.translate('attributes.employees.Email'), field: 'Email' }
         ];
 
         self.employeeTableProperties = {
@@ -78,9 +79,10 @@ function($, ko, KnockoutTemplateUtils) {
         };
 
         self.directColumns = [
-            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Employee', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
-            { headerText: 'Email', field: 'Email' }
+            { headerText: i18nutils.translate('attributes.employees.EmployeeId'), field: 'EmployeeId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Name'), renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: i18nutils.translate('attributes.employees.Email'), field: 'Email' }
         ];
 
         self.directTableProperties = {

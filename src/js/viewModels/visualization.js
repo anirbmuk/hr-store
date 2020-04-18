@@ -12,7 +12,15 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
         const self = this;
 
         self.allEmployees = ko.observable();
-        self.tableTitle = ko.observable('Employees');
+        self.tableTitle = ko.observable(i18nutils.translate('employees.header'));
+
+        self.messages = {
+            dynamic_table_title: function(jobId) {
+                return i18nutils.translate('messages.employees.employees_with_job', {
+                    jobId: jobId
+                });
+            }
+        };
 
         self.chartDataProvider = ko.observable(new ArrayDataProvider([], { idAttributes: 'id' }));
         self.selectedJobId = ko.observableArray([]);
@@ -29,7 +37,7 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
 
             if (selectedPieIndex !== undefined) {
                 const selectedJobId = chartData[selectedPieIndex].series;
-                self.tableTitle(`Employees with job ${selectedJobId}`);
+                self.tableTitle(self.messages.dynamic_table_title(selectedJobId));
                 const employeesWithThisJobId = employeeData.filter(employee => employee.JobId === selectedJobId)
                                                            .sort((a, b) => a.EmployeeId - b.EmployeeId);
                 self.employeeDataObject({
@@ -37,7 +45,7 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
                     idAttribute: 'EmployeeId'
                 });
             } else {
-                self.tableTitle('Employees');
+                self.tableTitle(i18nutils.translate('employees.header'));
                 self.employeeDataObject({
                     data: [],
                     idAttribute: 'EmployeeId'
@@ -59,10 +67,13 @@ function(ko, ArrayDataProvider, KnockoutTemplateUtils) {
         };
 
         self.employeeColumns = [
-            { headerText: 'Employee Id', field: 'EmployeeId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Name', renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
-            { headerText: 'Email', field: 'Email' },
-            { headerText: 'Job Id', field: 'JobId', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.EmployeeId'), field: 'EmployeeId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.Name'),
+              renderer: KnockoutTemplateUtils.getRenderer('employee_fn_ln_template', true) },
+            { headerText: i18nutils.translate('attributes.employees.Email'), field: 'Email' },
+            { headerText: i18nutils.translate('attributes.employees.JobId'), field: 'JobId',
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
         ];
 
         self.employeeTableProperties = {

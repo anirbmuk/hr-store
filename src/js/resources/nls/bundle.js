@@ -16,7 +16,13 @@ define({
             header: 'Employees'
         },
         masterdetail: {
-            header: 'Master-Detail'
+            header: 'Master-Detail',
+            locdept_tab: 'Locations / Departments',
+            empdirect_tab: 'Employees / Directs',
+            locations: 'Locations',
+            departments: 'Departments',
+            employees: 'Employees',
+            directs: 'Directs'
         },
         visualization: {
             header: 'Visualization'
@@ -24,12 +30,16 @@ define({
         actions: {
             create: 'Create',
             edit: 'Edit',
-            delete: 'Delete'
+            delete: 'Delete',
+            save: 'Save',
+            cancel: 'Cancel'
         },
         labels: {
             menu: 'Menu',
             logout: 'Sign Off',
-            search: 'Search'
+            search: 'Search',
+            count: 'Count',
+            jobs: 'Jobs'
         },
         messages: {
             validation_error_header: 'Validation error',
@@ -44,25 +54,50 @@ define({
             save_success_header: 'Data saved',
             save_success_message: 'Your changes have been saved',
             locations: {
-                duplicate_location: 'Duplicate Location Id'
+                duplicate_location: 'Duplicate Location Id',
+                not_exist_location: 'Location does not exist'
+            },
+            departments: {
+                duplicate_department: 'Duplicate Department Id',
+                not_exist_department: 'Department does not exist',
             },
             employees: {
                 duplicate_employee: 'Duplicate Employee Id',
                 not_exist_employee: 'Employee does not exist',
-                not_exist_department: 'Department does not exist',
                 email_not_formatted: 'Email is not correctly formatted',
                 manager_employee_diff: 'EmployeeId cannot be same as ManagerId',
-                manager_employee_valid: 'Employee with Id {manager} is not the manager of department {department}'
+                manager_employee_valid: 'Employee with Id {manager} is not the manager of department {department}',
+                employees_with_job: 'Employees with job {jobId}'
             }
         },
         attributes: {
             locations: {
-                LocationId: 'Location Id',
+                LocationId: 'Id',
                 Address: 'Address',
                 PostalCode: 'Postal Code',
                 City: 'City',
                 State: 'State',
                 Country: 'Country',
+            },
+            departments: {
+                DepartmentId: 'Id',
+                DepartmentName: 'Name',
+                ManagerId: 'Manager',
+                LocationId: 'Location'
+            },
+            employees: {
+                EmployeeId: 'Id',
+                FirstName: 'First Name',
+                LastName: 'Last Name',
+                Name: 'Name',
+                Phone: 'Phone',
+                HireDate: 'Hire Date',
+                Email: 'Email',
+                JobId: 'Job',
+                Salary: 'Salary',
+                Commission: 'Commission',
+                ManagerId: 'Manager',
+                DepartmentId: 'Department'
             }
         }
     },
