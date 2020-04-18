@@ -8,7 +8,7 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
         auth.token = ko.observable(null);
         auth.email = ko.observable(null);
         auth.role = ko.observable(null);
-
+        auth.locale = ko.observable('en-US');
     };
 
     AuthStateConfig.prototype.isAuthenticated = function() {
@@ -49,9 +49,11 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
         storageconfig.storeOnBrowserSession('token', data.token);
         storageconfig.storeOnBrowserSession('email', data.email);
         storageconfig.storeOnBrowserSession('role', data.role);
+        storageconfig.storeOnBrowserSession('locale', data.locale);
         this.token(data.token);
         this.email(data.email);
         this.role(data.role);
+        this.locale(data.locale);
     };
 
     AuthStateConfig.prototype.getAuthState = function() {
@@ -59,13 +61,19 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
         this.token(storageconfig.getFromBrowserSession('token'));
         this.email(storageconfig.getFromBrowserSession('email'));
         this.role(storageconfig.getFromBrowserSession('role'));
+        this.locale(storageconfig.getFromBrowserSession('locale'));
 
         const authState = {
             token: this.token,
             email: this.email,
-            role: this.role
+            role: this.role,
+            locale: this.locale
         };
         return authState
+    };
+
+    AuthStateConfig.prototype.getLocale = function() {
+        return this.locale() || 'en-US';
     };
 
     AuthStateConfig.prototype.signout = function() {
@@ -73,7 +81,7 @@ define(['knockout', './../helper/storage-config'], function(ko, storageconfig) {
         const successFn = function(data) {
             this.setAuthState({});
             storageconfig.clearAllApplicationsKeys();
-            routerconfig.navigate('login');
+            routerconfig.redirect('login');
             app.endProcessing();
         }.bind(this);
         const errorFn = function(error) {

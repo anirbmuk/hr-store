@@ -25,6 +25,20 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
     function HrTableModel(context) {
         var self = this;
 
+        self.message_strings = {
+          validation_error_header: i18nutils.translate('messages.validation_error_header'),
+          validation_error_text: i18nutils.translate('messages.validation_error_text'),
+          operation_error_header: i18nutils.translate('messages.operation_error_header'),
+          action_error_header: i18nutils.translate('messages.action_error_header'),
+          operation_row_edit_error: i18nutils.translate('messages.operation_row_edit_error'),
+          operation_row_delete_error: i18nutils.translate('messages.operation_row_delete_error'),
+          action_row_create_error: i18nutils.translate('messages.action_row_create_error'),
+          action_row_edit_error: i18nutils.translate('messages.action_row_edit_error'),
+          action_row_delete_error: i18nutils.translate('messages.action_row_delete_error'),
+          save_success_header: i18nutils.translate('messages.save_success_header'),
+          save_success_message: i18nutils.translate('messages.save_success_message')
+        };
+
         self.dataProvider = ko.observable();
         self.currentModel = ko.observable();
         self.searchTerm = ko.observable();
@@ -156,7 +170,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
               };
   
               const errorFn = function(err) {
-                self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
+                self.messages(self.buildMessage('error', self.message_strings.operation_error_header, err.responseJSON.error, 3000));
                 app.endProcessing();
               };
   
@@ -175,18 +189,18 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
               currentModel.destroy({
                 beforeSend: restutils.beforeSend,
                 success: function() {
-                  self.messages(self.buildMessage('confirmation', 'Data saved', 'Your changes have been saved', 3000));
+                  self.messages(self.buildMessage('confirmation', self.message_strings.save_success_header, self.message_strings.save_success_message, 3000));
                   self.refreshDatasource();
                   app.endProcessing();
                 },
                 error: function(err) {
-                  self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
+                  self.messages(self.buildMessage('error', self.message_strings.operation_error_header, err.responseJSON.error, 3000));
                   app.endProcessing();
                 },
                 wait: true
               });
             } else {
-              self.messages(self.buildMessage('error', 'Operation error', `Operation ${handler} is not supported`, 3000));
+              self.messages(self.buildMessage('error', self.message_strings.operation_error_header, `Operation ${handler} is not supported`, 3000));
               app.endProcessing();
             }
           }
@@ -197,14 +211,14 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
           const trackerId = '#' + self.componentId + '_addOrEditFormTracker';
           
           const successFn = function(data) {
-            self.messages(self.buildMessage('confirmation', 'Data saved', 'Your changes have been saved', 3000));
+            self.messages(self.buildMessage('confirmation', self.message_strings.save_success_header, self.message_strings.save_success_message, 3000));
             self.refreshDatasource();
             $(modalId)[0].close();
             app.endProcessing();
           };
 
           const errorFn = function(err) {
-            self.messages(self.buildMessage('error', 'Operation error', err.responseJSON.error, 3000));
+            self.messages(self.buildMessage('error', self.message_strings.operation_error_header, err.responseJSON.error, 3000));
             app.endProcessing();
           };
 
@@ -236,7 +250,7 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
               if (preSaveValidation) {
                 saveAction();
               } else {
-                self.messages(self.buildMessage('error', 'Validation error', 'There are validation errors on the form', 3000));
+                self.messages(self.buildMessage('error', self.message_strings.validation_error_header, self.message_strings.validation_error_text, 3000));
               }
             } else if (preSaveValidation instanceof Promise) {
               app.startProcessing();
@@ -245,11 +259,11 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
                 saveAction();
               }).catch(function(error) {
                 app.endProcessing();
-                self.messages(self.buildMessage('error', 'Validation error', error, 3000));
+                self.messages(self.buildMessage('error', self.message_strings.validation_error_header, error, 3000));
               });
             }
           } else {
-            self.messages(self.buildMessage('error', 'Validation error', 'There are validation errors on the form', 3000));
+            self.messages(self.buildMessage('error', self.message_strings.validation_error_header, self.message_strings.validation_error_text, 3000));
           }
         }
 
@@ -306,25 +320,25 @@ function (ko, Context, $, ArrayDataProvider, PagingDataProviderView, CollectionD
       const self = this;
       if (handler === 'deleteHandler') {
         if (!authconfig.hasDeletePrivilege()) {
-          self.messages(self.buildMessage('error', 'Unauthorized action', 'Delete operation is not allowed', 3000));
+          self.messages(self.buildMessage('error', self.message_strings.action_error_header, self.message_strings.action_row_delete_error, 3000));
           return false;
         }
         if (self.currentRowIndex() < 0) {
-          self.messages(self.buildMessage('error', 'Invalid operation', 'You must select a row to delete', 3000));
+          self.messages(self.buildMessage('error', self.message_strings.operation_error_header, self.message_strings.operation_row_delete_error, 3000));
           return false;
         }
       } else if (handler === 'editHandler') {
         if (!authconfig.hasEditPrivilege()) {
-          self.messages(self.buildMessage('error', 'Unauthorized action', 'Edit operation is not allowed', 3000));
+          self.messages(self.buildMessage('error', self.message_strings.action_error_header, self.message_strings.action_row_edit_error, 3000));
           return false;
         }
         if (self.currentRowIndex() < 0) {
-          self.messages(self.buildMessage('error', 'Invalid operation', 'You must select a row to edit', 3000));
+          self.messages(self.buildMessage('error', self.message_strings.operation_error_header, self.message_strings.operation_row_edit_error, 3000));
           return false;
         }
       } else if (handler === 'addHandler') {
         if (!authconfig.hasCreatePrivilege()) {
-          self.messages(self.buildMessage('error', 'Unauthorized action', 'Create operation is not allowed', 3000));
+          self.messages(self.buildMessage('error', self.message_strings.action_error_header, self.message_strings.action_row_create_error, 3000));
           return false;
         }
       }

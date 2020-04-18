@@ -33,6 +33,6 @@ App Hosting       | Heroku
 - - - -
 
 ## Sample Users
-Employee - hremployee@domain.com/retail@321 (view rights)  
-Manager - hrmanager@domain.com/retail@123 (create and edit rights)  
-Admin - hradmin@domain.com (create, edit and delete rights)  
+Employee - hremployee@domain.com/retail@321 (privilege: view || language: english)  
+Manager - hrmanager@domain.com/retail@123 (privilege: create, edit || language: spanish)  
+Admin - hradmin@domain.com (privilege: create, edit, delete || language: english)  

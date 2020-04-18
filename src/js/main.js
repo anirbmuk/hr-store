@@ -9,8 +9,7 @@
  * Example of Require.js boostrap javascript
  */
 
-requirejs.config(
-{
+requirejs.config({
   baseUrl: 'js',
 
   // Path mappings for the logical module names
@@ -33,12 +32,17 @@ requirejs.config(
     'proj4': 'libs/proj4js/dist/proj4-src',
     'css': 'libs/require-css/css',
     'touchr': 'libs/touchr/touchr'
-  },
-  shim: {
   }
   //endinjector
-}
-);
+  ,
+  config: {
+    ojL10n: {
+      merge: {
+        'ojtranslations/nls/ojtranslations': 'resources/nls/bundle'
+      }
+    }
+  }
+});
 
 /**
  * A top-level require call executed by the Application.
@@ -47,15 +51,17 @@ requirejs.config(
  * object in the callback
  */
 require(['ojs/ojbootstrap', 'knockout', 'appController', 
-         './helper/storage-config', './helper/router-config', './helper/rest-config', './helper/message-helper', './helper/format-helper',
+         './helper/storage-config', './helper/router-config', './helper/rest-config',
+         './helper/message-helper', './helper/format-helper', './helper/i18n-helper',
          './state/auth-state', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojtoolbar', 'ojs/ojmenu', 'ojs/ojmodule',
          'ojs/ojprogress'],
-  function (Bootstrap, ko, app, storageconfig, routerconfig, restutils, messageutils, formatterutils, authconfig) {
+  function (Bootstrap, ko, app, storageconfig, routerconfig, restutils, messageutils, formatterutils, i18nutils, authconfig) {
 
       Bootstrap.whenDocumentReady().then(
         function() {
           function init() {
             // Bind your ViewModel for the content of the whole page body.
+            i18nutils.setLocale(authconfig.getLocale());
             setup();
             oj.Router.sync().then(function() {
               ko.applyBindings(app, document.getElementById('globalBody'));
@@ -70,6 +76,7 @@ require(['ojs/ojbootstrap', 'knockout', 'appController',
             window.restutils = restutils;
             window.messageutils = messageutils;
             window.formatterutils = formatterutils;
+            window.i18nutils = i18nutils;
           }
 
           // If running in a hybrid (e.g. Cordova) environment, we need to wait for the deviceready

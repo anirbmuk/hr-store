@@ -76,6 +76,10 @@ define(['ojs/ojmodel', 'knockout', 'jquery'], function(oj, ko, $) {
         this.host = host;
     }
 
+    RestUtils.prototype.getHost = function() {
+        return this.host;
+    }
+
     return new RestUtils();
 
 });

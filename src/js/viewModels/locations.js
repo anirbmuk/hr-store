@@ -18,7 +18,9 @@ function(ko, ValidationBase) {
                     if (!value) {
                         resolve();
                     } else {
-                        restutils.getRestData('locations/' + value, null, function() { reject({ detail: 'Duplicate location id'}); }, function() { resolve(); })
+                        restutils.getRestData('locations/' + value, null,
+                        function() { reject({ detail: i18nutils.translate('messages.locations.duplicate_location')}); },
+                        function() { resolve(); })
                     }
                 });
             }
@@ -50,12 +52,12 @@ function(ko, ValidationBase) {
         self.urlPath = 'locations';
 
         self.locationColumns = [
-            { headerText: 'Location Id', field: 'LocationId' },
-            { headerText: 'Address', field: 'StreetAddress', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Postal Code', field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'City', field: 'City' },
-            { headerText: 'State', field: 'StateProvince', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: 'Country', field: 'CountryId' }
+            { headerText: i18nutils.translate('attributes.locations.LocationId'), field: 'LocationId' },
+            { headerText: i18nutils.translate('attributes.locations.Address'), field: 'StreetAddress', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.locations.PostalCode'), field: 'PostalCode', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.locations.City'), field: 'City' },
+            { headerText: i18nutils.translate('attributes.locations.State'), field: 'StateProvince', headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.locations.Country'), field: 'CountryId' }
         ];
 
         self.locationTableProperties = {
@@ -64,21 +66,21 @@ function(ko, ValidationBase) {
             toolbar: [
                 {
                     name: 'create',
-                    label: 'Create',
+                    label: i18nutils.translate('actions.create'),
                     iconOnly: false,
                     handler: 'addHandler',
                     disabled: !authconfig.hasCreatePrivilege()
                 },
                 {
                     name: 'edit',
-                    label: 'Edit',
+                    label: i18nutils.translate('actions.edit'),
                     iconOnly: false,
                     handler: 'editHandler',
                     disabled: !authconfig.hasEditPrivilege()
                 },
                 {
                     name: 'delete',
-                    label: 'Delete',
+                    label: i18nutils.translate('actions.delete'),
                     iconOnly: false,
                     handler: 'deleteHandler',
                     disabled: !authconfig.hasDeletePrivilege()
@@ -90,7 +92,8 @@ function(ko, ValidationBase) {
             },
             edit: {
                 attributes: [
-                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber', label: 'Id', required: true, editable: 'while-new',
+                    { componentId: 'location_li', field: 'LocationId', component: 'ojInputNumber',
+                      label: 'Id', required: true, editable: 'while-new',
                       asyncvalidators: [ self.asyncvalidators[0] ] },
                     { componentId: 'location_sa', field: 'StreetAddress', component: 'ojInputText', label: 'Address', editable: 'always' },
                     { componentId: 'location_pc', field: 'PostalCode', component: 'ojInputText', label: 'Postal Code', editable: 'always',
@@ -118,7 +121,7 @@ function(ko, ValidationBase) {
 
         self.locationSearchProperties = {
             showSearch: true,
-            searchPlaceholder: 'Search...'
+            searchPlaceholder: i18nutils.translate('labels.search')
         }
 
     }

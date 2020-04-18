@@ -13,6 +13,20 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
         self.hasEditPrivilege = ko.observable(authconfig.hasEditPrivilege());
         self.hasDeletePrivilege = ko.observable(authconfig.hasDeletePrivilege());
 
+        self.messages = {
+            duplicate_employee: i18nutils.translate('messages.employees.duplicate_employee'),
+            not_exist_employee: i18nutils.translate('messages.employees.not_exist_employee'),
+            not_exist_department: i18nutils.translate('messages.employees.not_exist_department'),
+            email_not_formatted: i18nutils.translate('messages.employees.email_not_formatted'),
+            manager_employee_diff: i18nutils.translate('messages.employees.manager_employee_diff'),
+            manager_employee_valid: function(manager, department) {
+                return i18nutils.translate('messages.employees.manager_employee_valid', {
+                    manager: manager,
+                    department: department
+                })
+            },
+        };
+
         self.getDateFormatter = function(date) {
             return formatterutils.getStringFromDate(date, 'medium');
         };
@@ -46,7 +60,9 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                     if (!value) {
                         resolve();
                     } else {
-                        restutils.getRestData('employees/' + value, null, function() { reject({ detail: 'Duplicate employee id'}); }, function() { resolve(); })
+                        restutils.getRestData('employees/' + value, null,
+                        function() { reject({ detail: self.messages.duplicate_employee}); },
+                        function() { resolve(); })
                     }
                 });
             }
@@ -58,7 +74,9 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                     if (!value) {
                         resolve();
                     } else {
-                        restutils.getRestData('employees/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Employee does not exist'}); })
+                        restutils.getRestData('employees/' + value, null,
+                        function() { resolve(); },
+                        function() { reject({ detail: self.messages.not_exist_employee}); })
                     }
                 });
             }
@@ -70,7 +88,9 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                     if (!value) {
                         resolve();
                     } else {
-                        restutils.getRestData('departments/' + value, null, function() { resolve(); }, function() { reject({ detail: 'Department does not exist'}); })
+                        restutils.getRestData('departments/' + value, null,
+                        function() { resolve(); },
+                        function() { reject({ detail: self.messages.not_exist_department}); })
                     }
                 });
             }
@@ -80,7 +100,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             type: 'regExp',
             options: {
                 pattern: "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*",
-                messageDetail: 'Email is not correctly formatted'
+                messageDetail: self.messages.email_not_formatted
             }
         };
 
@@ -186,14 +206,14 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             preSave: function(data) {
                 return new Promise(function(resolve, reject) {
                     if (data.EmployeeId === data.ManagerId) {
-                        reject('EmployeeId cannot be same as ManagerId');
+                        reject(self.messages.manager_employee_diff);
                     } else {
                         if (!!data.DepartmentId && data.ManagerId) {
                             const successFn = function(department) {
                                 if (!!department && department.ManagerId === data.ManagerId) {
                                     resolve();
                                 } else {
-                                    reject(`Employee with Id ${data.ManagerId} is not the manager of department ${data.DepartmentId}`);
+                                    reject(self.messages.manager_employee_valid(data.ManagerId, data.DepartmentId));
                                 }
                             };
                             const errorFn = function() {

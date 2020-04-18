@@ -33,15 +33,16 @@ define([
                 password: self.password()
             });
             const successFn = function(data) {
-                const state = { token: data.token, email: data.user.email, role: data.user.role };
+                const state = { token: data.token, email: data.user.email, role: data.user.role, locale: data.user.locale };
                 authconfig.setAuthState(state);
+                i18nutils.setLocale(data.user.locale);
                 self.username('');
                 self.password('');
-                routerconfig.navigate('locations');
+                routerconfig.redirect('locations');
                 app.endProcessing();
             };
             const errorFn = function(error) {
-                self.errorMessage('Failed to authenticate to HR system');
+                self.errorMessage(i18nutils.translate('login.autherror'));
                 app.endProcessing();
             }
             const tracker = $('#loginFormTracker')[0];
