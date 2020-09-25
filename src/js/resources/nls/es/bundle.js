@@ -1,5 +1,4 @@
 define({
-    location: 'Localizaciones',
     login: {
         header: 'Login',
         email: 'Email',
@@ -67,7 +66,8 @@ define({
             email_not_formatted: 'El correo electrónico no está formateado correctamente',
             manager_employee_diff: 'La identificación del empleado no puede ser la misma que la identificación del gerente',
             manager_employee_valid: 'El empleado con Id {manager} no es el gerente del departamento {department}',
-            employees_with_job: 'Empleados con trabajo {jobId}'
+            employees_with_job: 'Empleados con trabajo {jobId}',
+            employees_min_max_rating: 'Rating should be between {min} and {max}'
         }
     },
     attributes: {
@@ -97,7 +97,8 @@ define({
             Salary: 'Salario',
             Commission: 'Comisión',
             ManagerId: 'Gerente',
-            DepartmentId: 'Departamento'
+            DepartmentId: 'Departamento',
+            EmployeeRating: 'La tasación'
         }
     }
 });

@@ -67,7 +67,8 @@ define({
                 email_not_formatted: 'Email is not correctly formatted',
                 manager_employee_diff: 'EmployeeId cannot be same as ManagerId',
                 manager_employee_valid: 'Employee with Id {manager} is not the manager of department {department}',
-                employees_with_job: 'Employees with job {jobId}'
+                employees_with_job: 'Employees with job {jobId}',
+                employees_min_max_rating: 'Rating should be between {min} and {max}'
             }
         },
         attributes: {
@@ -97,7 +98,8 @@ define({
                 Salary: 'Salary',
                 Commission: 'Commission',
                 ManagerId: 'Manager',
-                DepartmentId: 'Department'
+                DepartmentId: 'Department',
+                EmployeeRating: 'Rating'
             }
         }
     },

@@ -2,7 +2,8 @@ define(
 ['knockout',
 'ojs/ojknockouttemplateutils',
 'ojs/ojarraydataprovider',
-'hr-table/loader'],
+'hr-table/loader',
+'ojs/ojgauge'],
 function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
 
     function EmployeeViewModel() {
@@ -40,6 +41,14 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
         };
 
         self.employeeJobs = ko.observable(new ArrayDataProvider([]));
+
+        self.performanceValues = [
+            { max: 1, shortDesc: 'Poor' },
+            { max: 2, shortDesc: 'Needs Improvement' },
+            { max: 3, shortDesc: 'Satisfactory' },
+            { max: 4, shortDesc: 'Exceeds Expectations' },
+            { max: 5, shortDesc: 'Outstanding' }
+        ];
 
         (function() {
             const successFn = function(data) {
@@ -104,8 +113,18 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             }
         };
 
+        self.rangeValidator = {
+            type: 'numberRange',
+            options: {
+                min: 0,
+                max: 5,
+                hint: { inRange: self.messages.employees_min_max_rating }
+            }
+        };
+
         self.validators = [
-            self.emailValidator
+            self.emailValidator,
+            self.rangeValidator
         ];
 
         self.asyncvalidators = [
@@ -127,6 +146,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                 CommissionPct: response.CommissionPct,
                 ManagerId: response.ManagerId,
                 DepartmentId: response.DepartmentId,
+                EmployeeRating: response.EmployeeRating || 0
             };
         };
         self.idAttribute = 'EmployeeId';
@@ -147,7 +167,8 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             { headerText: i18nutils.translate('attributes.employees.ManagerId'), field: 'ManagerId',
               headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: i18nutils.translate('attributes.employees.DepartmentId'), field: 'DepartmentId',
-              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+            { headerText: i18nutils.translate('attributes.employees.EmployeeRating'), renderer: KnockoutTemplateUtils.getRenderer('employee_er_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
         ];
 
         self.employeeTableProperties = {
@@ -208,7 +229,10 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                       asyncvalidators: [ self.asyncvalidators[1] ] },
                     { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber',
                       label: i18nutils.translate('attributes.employees.DepartmentId'), editable: 'always',
-                      asyncvalidators: [ self.asyncvalidators[2] ] }
+                      asyncvalidators: [ self.asyncvalidators[2] ] },
+                    { componentId: 'employee_er', field: 'EmployeeRating', component: 'ojInputNumber',
+                      label: i18nutils.translate('attributes.employees.EmployeeRating'), editable: self.hasDeletePrivilege() ? 'always': 'never',
+                      validators: [ self.validators[1] ] }
                 ]
             }
         };
