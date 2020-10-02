@@ -33,6 +33,6 @@ App Hosting       | Heroku
 - - - -
 
 ## Sample Users
-Employee - hremployee@domain.com/retail@321 (privilege: view || language: english)  
-Manager - hrmanager@domain.com/retail@123 (privilege: create, edit || language: spanish)  
+Employee - hremployee@domain.com/retail@321 (privilege: view || language: spanish)  
+Manager - hrmanager@domain.com/retail@123 (privilege: create, edit || language: english)  
 Admin - hradmin@domain.com (privilege: create, edit, delete || language: english)  
