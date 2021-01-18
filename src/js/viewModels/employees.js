@@ -2,8 +2,7 @@ define(
 ['knockout',
 'ojs/ojknockouttemplateutils',
 'ojs/ojarraydataprovider',
-'hr-table/loader',
-'ojs/ojgauge'],
+'hr-table/loader'],
 function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
 
     function EmployeeViewModel() {
@@ -167,8 +166,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
             { headerText: i18nutils.translate('attributes.employees.ManagerId'), field: 'ManagerId',
               headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
             { headerText: i18nutils.translate('attributes.employees.DepartmentId'), field: 'DepartmentId',
-              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
-            { headerText: i18nutils.translate('attributes.employees.EmployeeRating'), renderer: KnockoutTemplateUtils.getRenderer('employee_er_template', true), headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' },
+              headerClassName: 'oj-sm-only-hide', className: 'oj-sm-only-hide' }
         ];
 
         self.employeeTableProperties = {
@@ -229,10 +227,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                       asyncvalidators: [ self.asyncvalidators[1] ] },
                     { componentId: 'employee_di', field: 'DepartmentId', component: 'ojInputNumber',
                       label: i18nutils.translate('attributes.employees.DepartmentId'), editable: 'always',
-                      asyncvalidators: [ self.asyncvalidators[2] ] },
-                    { componentId: 'employee_er', field: 'EmployeeRating', component: 'ojInputNumber',
-                      label: i18nutils.translate('attributes.employees.EmployeeRating'), editable: self.hasDeletePrivilege() ? 'always': 'never',
-                      validators: [ self.validators[1] ] }
+                      asyncvalidators: [ self.asyncvalidators[2] ] }
                 ]
             }
         };

@@ -1,6 +1,6 @@
 {
   "name": "hrstore",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "MongoDB, Express, Node and JET - the MENJ stack",
   "repository": {
     "type": "git",
@@ -10,7 +10,9 @@
     "hr",
     "oracle",
     "node",
-    "express"
+    "express",
+    "mongodb",
+    "jet"
   ],
   "author": "anirbmuk",
   "license": "ISC",
@@ -19,10 +21,12 @@
   },
   "homepage": "https://github.com/anirbmuk/hr-store#readme",
   "dependencies": {
-    "@oracle/oraclejet": "~9.1.0"
+    "@oracle/oraclejet": "~7.2.0"
   },
   "devDependencies": {
-    "@oracle/oraclejet-tooling": "~9.1.0"
+    "@oracle/oraclejet-tooling": "~7.2.0",
+    "qunit-reporter-junit": "^1.1.1",
+    "qunit": "^2.4.1"
   },
   "engines": {
     "node": ">=0.10.0"

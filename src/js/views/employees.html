@@ -27,13 +27,3 @@
         <oj-bind-text value="[[$context.row.FirstName + ' ' + $context.row.LastName]]"></oj-bind-text>
     </td>
 </script>
-<script type="text/html" id="employee_er_template">
-    <td>
-        <oj-rating-gauge
-            value="[[$context.row.EmployeeRating]]" 
-            thresholds="[[$parent.performanceValues]]"
-            labelled-by="customTooltip"
-            readonly>
-        </oj-rating-gauge>
-    </td>
-</script>

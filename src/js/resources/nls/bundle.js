@@ -17,8 +17,8 @@ define({
         },
         masterdetail: {
             header: 'Master-Detail',
-            locdept_tab: 'Locations / Departments',
-            empdirect_tab: 'Employees / Directs',
+            locdept_tab: 'Locations - Departments',
+            empdirect_tab: 'Employees - Directs',
             locations: 'Locations',
             departments: 'Departments',
             employees: 'Employees',
