@@ -243,7 +243,7 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                     if (data.EmployeeId === data.ManagerId) {
                         reject(self.messages.manager_employee_diff);
                     } else {
-                        if (!!data.DepartmentId && data.ManagerId) {
+                        /* if (!!data.DepartmentId && data.ManagerId) {
                             const successFn = function(department) {
                                 if (!!department && department.ManagerId === data.ManagerId) {
                                     resolve();
@@ -257,7 +257,8 @@ function(ko, KnockoutTemplateUtils, ArrayDataProvider) {
                             restutils.getRestData('departments/' + data.DepartmentId, null, successFn, errorFn);
                         } else {
                             resolve();
-                        }
+                        } */
+                        resolve();
                     }
                 });
             }
