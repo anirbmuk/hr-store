@@ -1,22 +1,32 @@
 define([
 'ojs/ojcore',
 'knockout',
+'jquery',
 'ojs/ojbutton',
 'ojs/ojinputtext',
 'ojs/ojlabel',        
 'ojs/ojlabelvalue',
 'ojs/ojformlayout',
 'ojs/ojvalidationgroup'
-], function(oj, ko) {
+], function(oj, ko, $) {
 
     function LoginModule() {
 
         var self = this;
+        console.log(self.__proto__);
 
         self.username = ko.observable('');
         self.password = ko.observable('');
 
         self.errorMessage = ko.observable('');
+
+        // Code for allowing enter key on the login form to submit
+        $(document).ready(function() {
+            $('#menjLoginForm').on('submit', function(event) {
+                event.preventDefault();
+                return self.userLogin();
+            });
+        });
 
         self.emailValidator = {
             type: 'regExp',
@@ -41,7 +51,7 @@ define([
                 routerconfig.redirect('locations');
                 app.endProcessing();
             };
-            const errorFn = function(error) {
+            const errorFn = function() {
                 self.errorMessage(i18nutils.translate('login.autherror'));
                 app.endProcessing();
             }
