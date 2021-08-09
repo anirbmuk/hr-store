@@ -6,27 +6,25 @@
 <div class="login-box">
     <oj-validation-group id="loginFormTracker">
         <oj-form-layout>
-            <form action="GET" id="menjLoginForm">
-                <div class="oj-margin app-padding5">
-                    <oj-label for="username" show-required="true">
-                        <oj-bind-text value="[[i18nutils.translate('login.email')]]"></oj-bind-text>
-                    </oj-label>
-                    <oj-input-text id="username" value="{{username}}" class="login-item" autocomplete="off" autofocus="true"
-                        required="true" validators="[[ [emailValidator] ]]">
-                    </oj-input-text>
-                </div>
-                <div class="oj-margin app-padding5">
-                    <oj-label for="password" show-required="true">
-                        <oj-bind-text value="[[i18nutils.translate('login.password')]]"></oj-bind-text>
-                    </oj-label>
-                    <oj-input-password id="password" value="{{password}}" class="login-item" required="true"></oj-input-password>
-                </div>
-                <div class="oj-margin app-padding5">
-                    <oj-button on-oj-action="[[userLogin]]" class="login-item">
-                        <oj-bind-text value="[[i18nutils.translate('login.header')]]"></oj-bind-text>
-                    </oj-button>
-                </div>
-            </form>
+            <div class="oj-margin app-padding5">
+                <oj-label for="username" show-required="true">
+                    <oj-bind-text value="[[i18nutils.translate('login.email')]]"></oj-bind-text>
+                </oj-label>
+                <oj-input-text id="username" value="{{username}}" class="login-item" autocomplete="off" autofocus="true"
+                    required="true" validators="[[ [emailValidator] ]]">
+                </oj-input-text>
+            </div>
+            <div class="oj-margin app-padding5">
+                <oj-label for="password" show-required="true">
+                    <oj-bind-text value="[[i18nutils.translate('login.password')]]"></oj-bind-text>
+                </oj-label>
+                <oj-input-password id="password" value="{{password}}" class="login-item" required="true"></oj-input-password>
+            </div>
+            <div class="oj-margin app-padding5">
+                <oj-button on-oj-action="[[userLogin]]" class="login-item">
+                    <oj-bind-text value="[[i18nutils.translate('login.header')]]"></oj-bind-text>
+                </oj-button>
+            </div>
             <oj-bind-if test="[[!!errorMessage()]]">
                 <div class="oj-margin app-padding5 error-code center-text">
                     <oj-bind-text value="[[errorMessage]]"></oj-bind-text>

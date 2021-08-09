@@ -20,13 +20,13 @@ define([
 
         self.errorMessage = ko.observable('');
 
-        // Code for allowing enter key on the login form to submit
+        /* Code for allowing enter key on the login form to submit
         $(document).ready(function() {
             $('#menjLoginForm').on('submit', function(event) {
                 event.preventDefault();
                 return self.userLogin();
             });
-        });
+        }); */
 
         self.emailValidator = {
             type: 'regExp',
