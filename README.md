@@ -11,6 +11,9 @@ https://jetsolutions.anirbanblogs.com/2020/03/jet-with-mongodb-nodejs-and-expres
 ## REST API (Node and Express)
 https://github.com/anirbmuk/hr-server.git  
 
+## REST API (Node and Express) - TypeScript
+https://github.com/anirbmuk/hr-server-ts.git  
+
 - - - -
 
 ## Cloud deployment
@@ -25,8 +28,8 @@ What I wanted     | What I got
 ----------------- | --------------
 IDE               | MS Visual Studio Code
 Front-end         | Oracle JET (7.2.0)
-Database          | MongoDB (4.2.3)
-Middleware        | Node (10.15.3), Express (4.17.1)
+Database          | MongoDB
+Middleware        | Node, Express
 MW Hosting        | Heroku
 App Hosting       | Heroku
 
