@@ -17,8 +17,8 @@ https://github.com/anirbmuk/hr-server-ts.git
 - - - -
 
 ## Cloud deployment
-JET - https://menj-stack.herokuapp.com  
-Node & Express - https://menj-server.herokuapp.com  
+JET - ~https://menj-stack.herokuapp.com~ (Heroku decommissioned)  
+Node & Express - ~https://menj-server.herokuapp.com~ (Heroku decommissioned)  
 Mongo - Cloud atlas  
 
 - - - -
@@ -30,8 +30,8 @@ IDE               | MS Visual Studio Code
 Front-end         | Oracle JET (7.2.0)
 Database          | MongoDB
 Middleware        | Node, Express
-MW Hosting        | Heroku
-App Hosting       | Heroku
+MW Hosting        | ~Heroku~
+App Hosting       | ~Heroku~
 
 - - - -
 
